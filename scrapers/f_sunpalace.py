@@ -12,46 +12,35 @@ from model import Event, guess_genre
 from venues import FUKUOKA_SUNPALACE
 from .base import http_get, soup_of, flatten_ws
 
-_MONTH_RE = re.compile(r"(20\d{2})年\s*(\d{1,2})月")
 _DAY_RE = re.compile(r"(\d{1,2})")
 _TIME_RE = re.compile(r"(\d{1,2}):(\d{2})")
 
 
 def fetch() -> list[Event]:
     now = _dt.date.today()
-    this_ym = f"{now.year}-{now.month:02d}"
     nxt = _dt.date(now.year + (now.month // 12), (now.month % 12) + 1, 1)
-    next_ym = f"{nxt.year}-{nxt.month:02d}"
     out: list[Event] = []
-    for ym in (this_ym, next_ym):
+    for year, month in ((now.year, now.month), (nxt.year, nxt.month)):
         try:
-            resp = http_get(f"https://www.f-sunpalace.com/hall/?ym={ym}",
-                            accept="text/html,*/*")
-            out.extend(_parse(resp.text))
+            resp = http_get(
+                f"https://www.f-sunpalace.com/hall/?ym={year}-{month:02d}",
+                accept="text/html,*/*")
+            out.extend(_parse(resp.text, year, month))
         except Exception:
             continue
     return out
 
 
-def _parse(html: str) -> list[Event]:
+def _parse(html: str, year: int, month: int) -> list[Event]:
+    # 年月は取得対象の ym をそのまま使う（ページからは推測しない）。
+    # 公式ページの見出しには月表記が無く、本文先頭のカレンダーが常に当月を
+    # 指すため、以前は7月ページの公演を6月と誤判定し、浜崎あゆみ等が
+    # 1ヶ月手前にズレて配信されていた。
     doc = soup_of(html)
     events: list[Event] = []
     today = _dt.date.today()
     section = doc.select_one("section.schedule")
     if section is None:
-        return events
-
-    year = month = None
-    for el in section.select("h2, h3, h4, .month"):
-        m = _MONTH_RE.search(el.get_text())
-        if m:
-            year, month = int(m.group(1)), int(m.group(2))
-            break
-    if year is None or month is None:
-        m = _MONTH_RE.search(section.get_text())
-        if m:
-            year, month = int(m.group(1)), int(m.group(2))
-    if year is None or month is None:
         return events
 
     for li in section.select("li"):
