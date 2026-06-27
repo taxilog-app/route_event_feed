@@ -1,7 +1,13 @@
-"""みずほPayPayドーム福岡。
+"""みずほPayPayドーム福岡（イベントスケジュールのみ）。
 
-event_service.dart の _fetchPayPayDome（イベントスケジュール）と
-_fetchHawksHomeGames（ホークス公式戦）を移植。両ソースを結合して返す。
+コンサート/展示等のイベントは softbankhawks の event_schedule から取得する。
+ホークス公式戦（野球）はかつてここで _parse_games が softbankhawks の
+game/schedule から取得していたが、同ページの試合リンクが過去試合専用の
+/gamelive/result/ 形式で未来の試合を一切含まず、シーズン進行に伴い全試合が
+date<today で除外され0件化していた（＝ドームの野球が画面から消える事故）。
+そのため野球は未来分も確実に取れる npb.jp（npb_baseball.py、ラベル
+「みずほPayPay」）へ移管した。_parse_games と関連定数は回帰テスト
+（test_paypay_dome.py）の参照用に残すが fetch では呼ばない。
 """
 from __future__ import annotations
 
@@ -50,12 +56,9 @@ def fetch() -> list[Event]:
         out.extend(_parse_events(resp.text))
     except Exception:
         pass
-    try:
-        resp = http_get("https://www.softbankhawks.co.jp/game/schedule/",
-                        accept="text/html,*/*")
-        out.extend(_parse_games(resp.text))
-    except Exception:
-        pass
+    # 注: ホークス公式戦（野球）は npb_baseball.py（npb.jp）へ移管済み。
+    # softbankhawks の game/schedule は過去試合専用リンクで未来を取れないため
+    # ここでは呼ばない（モジュール冒頭の docstring 参照）。
     return out
 
 

@@ -1,8 +1,11 @@
-"""プロ野球 4球場（npb.jp の月別カレンダー schedule_MM.html）。
+"""プロ野球 球場（npb.jp の月別カレンダー schedule_MM.html）。
 
 明治神宮野球場(ヤクルト)/横浜スタジアム(DeNA)/ZOZOマリン(ロッテ)/阪神甲子園(阪神)
-の本拠地開催を npb.jp の公式日程から一括取得する。
-（PayPayドーム/バンテリンD/京セラD/ベルーナD/東京Dは各専用スクレイパーが担当。）
+/みずほPayPayドーム(ソフトバンク) の本拠地開催を npb.jp の公式日程から一括取得する。
+（PayPayドームのホークス戦は元々 softbankhawks 専用スクレイパーが担当していたが、
+そちらは過去試合の /gamelive/result/ リンク依存で未来の試合を取得できないため、
+未来分も月ナビ付きで確実に取れる npb.jp 経由へ移管した。
+バンテリンD/京セラD/ベルーナD/東京Dは引き続き各専用スクレイパーが担当。）
 
 カレンダーの1日セルは `td > div.date`（日番号）＋`a.link_block`（1試合）。
 各 link_block は:
@@ -18,7 +21,9 @@ import datetime as _dt
 import re
 
 from model import Event, GENRE_SPORTS
-from venues import MEIJI_JINGU, YOKOHAMA_STADIUM, ZOZO_MARINE, KOSHIEN
+from venues import (
+    MEIJI_JINGU, YOKOHAMA_STADIUM, ZOZO_MARINE, KOSHIEN, PAYPAY_DOME,
+)
 from .base import http_get, soup_of, flatten_ws
 
 # 2つ目 td.state の球場名（空白除去後）→ Venue
@@ -27,6 +32,7 @@ _VENUE_BY_LABEL = {
     "横浜": YOKOHAMA_STADIUM,
     "ZOZOマリン": ZOZO_MARINE,
     "甲子園": KOSHIEN,
+    "みずほPayPay": PAYPAY_DOME,  # ソフトバンク本拠地（過去は専用スクレイパー担当）
 }
 # チーム正式名(img alt)→短縮名
 _SHORT = {
