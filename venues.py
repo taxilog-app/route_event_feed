@@ -101,7 +101,7 @@ AJINOMOTO_STADIUM = Venue(
 )
 BELLUNA_DOME = Venue(
     key="belluna_dome", name="ベルーナドーム",
-    lat=35.759500, lng=139.421600, region="埼玉", big_box=True,
+    lat=35.768900, lng=139.420800, region="埼玉", big_box=True,
     official_url="https://bellunadome.seibulions.co.jp/",
 )
 TOKYO_INTL_FORUM = Venue(
@@ -172,7 +172,8 @@ KOSHIEN = Venue(
     lat=34.721100, lng=135.361700, region="兵庫", big_box=True,
     official_url="https://npb.jp/games/2026/",
 )
-# NPB本拠地の穴埋め（2026-07 追加）。日本ハムは北広島(札幌交通圏内)へ移転。
+# NPB本拠地の穴埋め（2026-07 追加）。日本ハムは北広島へ移転
+# （北広島市は札幌交通圏ではなく千歳・空知・後志地区＝境界データで実測 2026-08-09）。
 ESCON_FIELD = Venue(
     key="escon_field", name="エスコンフィールド北海道",
     lat=42.940300, lng=141.610000, region="北海道", big_box=True,

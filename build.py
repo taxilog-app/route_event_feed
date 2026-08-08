@@ -13,6 +13,7 @@ import sys
 
 from model import build_feed, GENRES
 from venues import ALL_VENUES
+from venue_areas import VENUE_AREAS
 import scrapers
 
 OUT_DIR = os.path.join(os.path.dirname(__file__), "out")
@@ -69,6 +70,32 @@ def _previous_total() -> int | None:
             return len(json.load(f).get("events", []))
     except Exception:  # noqa: BLE001 - 壊れた前回ファイルは無視
         return None
+
+
+def apply_area_keys(feed: dict) -> list[str]:
+    """各会場へ営業圏キー(areaKey)を付ける。アプリはこれと選択中の営業圏
+    （料金プリセット）を突き合わせて絞り込む（県名一致は北九州問題で廃止）。
+
+    検査で止める理由＝割り当て漏れ・存在しないキーのまま配ると、アプリ側で
+    黙って全国表示に落ちる／その会場だけ絞り込みから消える事故になるため。
+    """
+    problems = []
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "area_keys.json")
+    with open(path, encoding="utf-8") as f:
+        allowed = {a["key"] for a in json.load(f)["areas"]}
+    for k, a in VENUE_AREAS.items():
+        if a not in allowed:
+            problems.append(
+                f"venue_areas.py: '{k}' の営業圏キー '{a}' が area_keys.json の83地区に無い")
+    for v in ALL_VENUES:
+        if v.key not in VENUE_AREAS:
+            problems.append(
+                f"venue_areas.py に会場 '{v.key}'（{v.name}）の行が無い（割り当て表へ足すこと）")
+    for v in feed.get("venues", []):
+        area = VENUE_AREAS.get(v["key"])
+        if area is not None:
+            v["areaKey"] = area
+    return problems
 
 
 def sanity_gate(feed: dict, errors: list[str], prev_total: int | None) -> list[str]:
@@ -139,11 +166,12 @@ def main():
     prev_total = _previous_total()
     events, errors = collect()
     feed = build_feed(events, ALL_VENUES)
+    area_problems = apply_area_keys(feed)
 
     # ★サニティゲート: 違反したら JSON を書かずに exit(1)。
     # CI ではデプロイが止まり、直前の正常な Pages 配信がそのまま残る
     # （壊れたスクレイパーで空/激減データを全端末へ配信しない）。
-    reasons = sanity_gate(feed, errors, prev_total)
+    reasons = area_problems + sanity_gate(feed, errors, prev_total)
     if reasons and not force:
         print("[GATE FAILED] 出力を中止しました（直前の正常データを保持）:",
               file=sys.stderr)

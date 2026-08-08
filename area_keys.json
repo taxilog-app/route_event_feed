@@ -1,0 +1,420 @@
+{
+ "note": "83営業圏（法令の運賃ブロック）の正式キー名簿。venue_areas.py の割り当て先はこの中に限る（build.pyが検査）。source=boundary_feed は丁目境界ハブ(route_boundary_feed coverage.json)と同一キー。source=minted は境界ハブに未収録のため当リポジトリで先に採番したもの＝境界ハブ側でこの地区を作る際は必ず同じキーを使うこと。",
+ "areas": [
+  {
+   "key": "sapporo",
+   "label": "札幌・小樽地区（北海道）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "chitose",
+   "label": "千歳・空知・後志地区（北海道）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "asahikawa",
+   "label": "旭川地区（北海道）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "hakodate_a",
+   "label": "函館Ａ地区（北海道）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "hakodate_b",
+   "label": "函館Ｂ地区（北海道）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "muroran",
+   "label": "室蘭地区（北海道）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "kushiro",
+   "label": "釧路地区（北海道）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "obihiro",
+   "label": "帯広地区（北海道）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "kitami",
+   "label": "北見地区（北海道）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "aomori",
+   "label": "青森地区（東北）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "iwate_a",
+   "label": "岩手（旧岩手県A地区）地区（東北）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "iwate_b",
+   "label": "岩手（旧岩手県Ｂ地区）地区（東北）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "sendai",
+   "label": "仙台地区（東北）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "miyagi",
+   "label": "宮城地区（東北）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "akita",
+   "label": "秋田地区（東北）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "yamagata",
+   "label": "山形地区（東北）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "fukushima",
+   "label": "福島地区（東北）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "niigata_a",
+   "label": "新潟（旧新潟県Ａ地区）地区（北陸信越）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "niigata_b",
+   "label": "新潟（旧新潟県Ｂ地区）地区（北陸信越）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "nagano_a",
+   "label": "長野（旧長野県Ａ地区）地区（北陸信越）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "nagano_b",
+   "label": "長野（旧長野県Ｂ地区）地区（北陸信越）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "toyama",
+   "label": "富山地区（北陸信越）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "ishikawa",
+   "label": "石川地区（北陸信越）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "hiroshima_city",
+   "label": "広島市域地区（中国）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "hiroshima",
+   "label": "広島地区（中国）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "tottori",
+   "label": "鳥取地区（中国）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "okayama",
+   "label": "岡山地区（中国）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "yamaguchi",
+   "label": "山口地区（中国）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "shimane_mainland",
+   "label": "旧島根県本土地区（中国）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "shimane_oki",
+   "label": "旧島根県隠岐地区（中国）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "kagawa",
+   "label": "香川県香川地区（四国）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "shodoshima",
+   "label": "香川県小豆島地区（四国）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "tokushima_city",
+   "label": "徳島県市部地区（四国）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "tokushima_gun",
+   "label": "徳島県郡部地区（四国）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "ehime",
+   "label": "愛媛地区（四国）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "kochi_gun",
+   "label": "高知県郡部地区（四国）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "kochi_city",
+   "label": "高知県高知市域地区（四国）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "fukuoka",
+   "label": "福岡交通圏（福岡市・春日・大野城ほか）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "kitakyushu",
+   "label": "北九州市域地区（九州）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "fukuoka_b",
+   "label": "福岡県B地区（久留米・飯塚ほか39市町村）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "saga",
+   "label": "佐賀地区（九州）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "nagasaki",
+   "label": "長崎本土地区（九州）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "nagasaki_islands",
+   "label": "長崎離島地区（九州）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "kumamoto",
+   "label": "熊本地区（九州）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "oita",
+   "label": "大分地区（九州）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "miyazaki",
+   "label": "宮崎地区（九州）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "kagoshima",
+   "label": "鹿児島地区（九州）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "amami",
+   "label": "奄美地区（九州）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "tokyo23",
+   "label": "東京23区・武三交通圏",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "tama",
+   "label": "多摩地区（関東）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "tokyo_islands",
+   "label": "東京島しょ地区（関東）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "keihin",
+   "label": "京浜地区（関東）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "sagami",
+   "label": "相模・鎌倉地区（関東）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "odawara",
+   "label": "小田原地区（関東）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "saitama_s",
+   "label": "埼玉南部地区（関東）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "saitama_n",
+   "label": "埼玉北部地区（関東）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "chiba",
+   "label": "千葉地区（関東）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "gunma_a",
+   "label": "群馬（旧群馬県Ａ地区）地区（関東）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "gunma_b",
+   "label": "群馬（旧群馬県Ｂ地区）地区（関東）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "tochigi",
+   "label": "栃木地区（関東）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "ibaraki",
+   "label": "茨城地区（関東）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "yamanashi_a",
+   "label": "山梨（旧山梨県Ａ地区）地区（関東）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "yamanashi_b",
+   "label": "山梨（旧山梨県Ｂ地区）地区（関東）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "osaka",
+   "label": "大阪市域交通圏",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "kyoto_city",
+   "label": "京都市域地区（近畿）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "kyoto_n",
+   "label": "京都北部地区（近畿）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "kobe",
+   "label": "神戸市域地区（近畿）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "hyogo",
+   "label": "兵庫地区（近畿）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "nara",
+   "label": "奈良地区（近畿）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "shiga",
+   "label": "滋賀地区（近畿）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "wakayama",
+   "label": "和歌山地区（近畿）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "nagoya",
+   "label": "名古屋交通圏（愛知）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "owari_mikawa",
+   "label": "尾張・三河地区（中部）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "shizuoka",
+   "label": "静岡地区（中部）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "izu",
+   "label": "伊豆地区（中部）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "izumi",
+   "label": "泉地区（中部）",
+   "source": "minted_2026-08-09"
+  },
+  {
+   "key": "gifu",
+   "label": "岐阜（旧岐阜地区）地区（中部）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "hida",
+   "label": "岐阜（旧飛騨地区）地区（中部）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "mie",
+   "label": "三重地区（中部）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "kiho",
+   "label": "紀宝地区（中部）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "fukui",
+   "label": "福井地区（中部）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "okinawa_main",
+   "label": "沖縄県本島地区（沖縄）",
+   "source": "boundary_feed"
+  },
+  {
+   "key": "okinawa_islands",
+   "label": "沖縄県離島地区（沖縄）",
+   "source": "boundary_feed"
+  }
+ ]
+}
