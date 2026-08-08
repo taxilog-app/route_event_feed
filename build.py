@@ -30,7 +30,10 @@ def _required_event_keys() -> set:
 
 
 def _required_venue_keys() -> set:
-    return {"key", "name", "lat", "lng", "region", "bigBox", "officialUrl"}
+    # areaKey は apply_area_keys が全会場へ必ず付ける（割り当て漏れはそこで止まる）。
+    # ここは「完全一致」の検査なので、出力に項目を足したら必ずここも足すこと。
+    return {"key", "name", "lat", "lng", "region", "bigBox", "officialUrl",
+            "areaKey"}
 
 
 def validate_schema(feed: dict) -> list[str]:
