@@ -23,6 +23,7 @@ import re
 from model import Event, GENRE_SPORTS
 from venues import (
     MEIJI_JINGU, YOKOHAMA_STADIUM, ZOZO_MARINE, KOSHIEN, PAYPAY_DOME,
+    ESCON_FIELD, RAKUTEN_PARK, MAZDA_STADIUM,
 )
 from .base import http_get, soup_of, flatten_ws
 
@@ -33,6 +34,9 @@ _VENUE_BY_LABEL = {
     "ZOZOマリン": ZOZO_MARINE,
     "甲子園": KOSHIEN,
     "みずほPayPay": PAYPAY_DOME,  # ソフトバンク本拠地（過去は専用スクレイパー担当）
+    "エスコンＦ": ESCON_FIELD,      # 日本ハム（npb.jp表記は全角Ｆ）
+    "楽天モバイル": RAKUTEN_PARK,    # 楽天
+    "マツダスタジアム": MAZDA_STADIUM,  # 広島
 }
 # チーム正式名(img alt)→短縮名
 _SHORT = {

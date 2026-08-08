@@ -172,6 +172,50 @@ KOSHIEN = Venue(
     lat=34.721100, lng=135.361700, region="兵庫", big_box=True,
     official_url="https://npb.jp/games/2026/",
 )
+# NPB本拠地の穴埋め（2026-07 追加）。日本ハムは北広島(札幌交通圏内)へ移転。
+ESCON_FIELD = Venue(
+    key="escon_field", name="エスコンフィールド北海道",
+    lat=42.940300, lng=141.610000, region="北海道", big_box=True,
+    official_url="https://npb.jp/games/2026/",
+)
+RAKUTEN_PARK = Venue(
+    key="rakuten_park", name="楽天モバイルパーク宮城",
+    lat=38.256400, lng=140.902700, region="宮城", big_box=True,
+    official_url="https://npb.jp/games/2026/",
+)
+MAZDA_STADIUM = Venue(
+    key="mazda_stadium", name="MAZDA Zoom-Zoomスタジアム広島",
+    lat=34.391900, lng=132.484700, region="広島", big_box=True,
+    official_url="https://npb.jp/games/2026/",
+)
+
+# ── J-League スタジアム（2026-07 統一スクレイパー jleague.py 用）──
+_JL_URL = "https://data.j-league.or.jp/SFMS01/"
+JL_KOKURITSU = Venue(key="jl_kokuritsu", name="国立競技場", lat=35.677800, lng=139.714700, region="東京", big_box=True, official_url=_JL_URL)
+JL_SAITAMA = Venue(key="jl_saitama_stadium", name="埼玉スタジアム2002", lat=35.903600, lng=139.717500, region="埼玉", big_box=True, official_url=_JL_URL)
+JL_TODOROKI = Venue(key="jl_todoroki", name="等々力陸上競技場", lat=35.564700, lng=139.660300, region="神奈川", big_box=True, official_url=_JL_URL)
+JL_NIPPATSU = Venue(key="jl_nippatsu", name="ニッパツ三ツ沢球技場", lat=35.475000, lng=139.597800, region="神奈川", big_box=True, official_url=_JL_URL)
+JL_LEMON = Venue(key="jl_lemon_hiratsuka", name="レモンガススタジアム平塚", lat=35.341900, lng=139.338900, region="神奈川", big_box=True, official_url=_JL_URL)
+JL_MACHIDA = Venue(key="jl_machida", name="町田GIONスタジアム", lat=35.588900, lng=139.454700, region="東京", big_box=True, official_url=_JL_URL)
+JL_GIONS = Venue(key="jl_gion_sagamihara", name="ギオンスタジアム(相模原)", lat=35.552000, lng=139.360000, region="神奈川", big_box=True, official_url=_JL_URL)
+JL_YAMAHA = Venue(key="jl_yamaha", name="ヤマハスタジアム", lat=34.718600, lng=137.883600, region="静岡", big_box=True, official_url=_JL_URL)
+JL_IAI = Venue(key="jl_iai_nihondaira", name="IAIスタジアム日本平", lat=34.957800, lng=138.449700, region="静岡", big_box=True, official_url=_JL_URL)
+JL_TOYOTA = Venue(key="jl_toyota", name="豊田スタジアム", lat=35.083900, lng=137.171900, region="愛知", big_box=True, official_url=_JL_URL)
+JL_MIZUHO = Venue(key="jl_mizuho", name="パロマ瑞穂スタジアム", lat=35.128900, lng=136.950800, region="愛知", big_box=True, official_url=_JL_URL)
+JL_PANASTA = Venue(key="jl_panasonic_suita", name="パナソニックスタジアム吹田", lat=34.803600, lng=135.538900, region="大阪", big_box=True, official_url=_JL_URL)
+JL_YODOKO = Venue(key="jl_yodoko", name="ヨドコウ桜スタジアム", lat=34.614400, lng=135.518300, region="大阪", big_box=True, official_url=_JL_URL)
+JL_NOEVIR = Venue(key="jl_noevir_kobe", name="ノエビアスタジアム神戸", lat=34.656700, lng=135.169400, region="兵庫", big_box=True, official_url=_JL_URL)
+JL_SANGA = Venue(key="jl_sanga_kameoka", name="サンガスタジアム by KYOCERA", lat=35.011900, lng=135.574700, region="京都", big_box=True, official_url=_JL_URL)
+JL_EDION = Venue(key="jl_edion_peace", name="エディオンピースウイング広島", lat=34.396900, lng=132.451900, region="広島", big_box=True, official_url=_JL_URL)
+JL_YURTEC = Venue(key="jl_yurtec_sendai", name="ユアテックスタジアム仙台", lat=38.271600, lng=140.880300, region="宮城", big_box=True, official_url=_JL_URL)
+JL_DENKA = Venue(key="jl_denka_swan", name="デンカビッグスワンスタジアム", lat=37.886900, lng=139.065300, region="新潟", big_box=True, official_url=_JL_URL)
+JL_FUKUARI = Venue(key="jl_fukuari", name="フクダ電子アリーナ", lat=35.561900, lng=140.106400, region="千葉", big_box=True, official_url=_JL_URL)
+JL_MIKUNI = Venue(key="jl_mikuni_kitakyushu", name="ミクニワールドスタジアム北九州", lat=33.896300, lng=130.924700, region="福岡", big_box=True, official_url=_JL_URL)
+JL_EKIMAE = Venue(key="jl_ekimae_tosu", name="駅前不動産スタジアム", lat=33.373600, lng=130.521900, region="佐賀", big_box=True, official_url=_JL_URL)
+JL_EGAO = Venue(key="jl_egao_kumamoto", name="えがお健康スタジアム", lat=32.784700, lng=130.794700, region="熊本", big_box=True, official_url=_JL_URL)
+JL_OKAYAMA = Venue(key="jl_okayama", name="シティライトスタジアム(岡山)", lat=34.663600, lng=133.946300, region="岡山", big_box=True, official_url=_JL_URL)
+JL_ATSUBETSU = Venue(key="jl_atsubetsu", name="厚別公園競技場", lat=43.035600, lng=141.447200, region="北海道", big_box=True, official_url=_JL_URL)
+JL_MERCARI = Venue(key="jl_mercari_kashima", name="メルカリスタジアム", lat=35.992200, lng=140.640800, region="茨城", big_box=True, official_url=_JL_URL)
 
 # 全会場リスト（build.py から参照）
 ALL_VENUES = [
@@ -184,6 +228,11 @@ ALL_VENUES = [
     BELLUNA_DOME, TOKYO_INTL_FORUM, OSAKA_JO_HALL, FESTIVAL_HALL, IG_ARENA,
     PIA_ARENA_MM, NAGAI_STADIUM,
     MEIJI_JINGU, YOKOHAMA_STADIUM, ZOZO_MARINE, KOSHIEN,
+    ESCON_FIELD, RAKUTEN_PARK, MAZDA_STADIUM,
+    JL_KOKURITSU, JL_SAITAMA, JL_TODOROKI, JL_NIPPATSU, JL_LEMON, JL_MACHIDA,
+    JL_GIONS, JL_YAMAHA, JL_IAI, JL_TOYOTA, JL_MIZUHO, JL_PANASTA, JL_YODOKO,
+    JL_NOEVIR, JL_SANGA, JL_EDION, JL_YURTEC, JL_DENKA, JL_FUKUARI, JL_MIKUNI,
+    JL_EKIMAE, JL_EGAO, JL_OKAYAMA, JL_ATSUBETSU, JL_MERCARI,
 ]
 
 # マリンメッセ系: CMS会場ID → Venue

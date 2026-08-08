@@ -3,7 +3,6 @@ from . import (
     marine_messe,
     f_sunpalace,
     paypay_dome,
-    avispa,
     hakataza,
     fukuoka_civic_hall,
     momochi,
@@ -23,8 +22,8 @@ from . import (
     osaka_jo_hall,
     festival_hall,
     pia_arena_mm,
-    cerezo,
     npb_baseball,
+    jleague,   # J1/J2/J3統一（旧 avispa/cerezo を統合）
 )
 
 # build.py はこのリストを順に実行する。失敗しても他に影響しないよう個別try。
@@ -32,7 +31,6 @@ ALL_SCRAPERS = [
     marine_messe,
     f_sunpalace,
     paypay_dome,
-    avispa,
     hakataza,
     fukuoka_civic_hall,
     momochi,
@@ -52,6 +50,6 @@ ALL_SCRAPERS = [
     osaka_jo_hall,
     festival_hall,
     pia_arena_mm,
-    cerezo,
     npb_baseball,
+    jleague,
 ]
