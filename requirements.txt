@@ -1,2 +1,4 @@
 requests>=2.31
 beautifulsoup4>=4.12
+# 函館市民会館の催物案内はPDFしか無いため。純Python＝CIに外部コマンド(poppler)が要らない
+pypdf>=5.0

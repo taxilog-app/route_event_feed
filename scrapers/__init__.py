@@ -24,6 +24,8 @@ from . import (
     pia_arena_mm,
     npb_baseball,
     jleague,   # J1/J2/J3統一（旧 avispa/cerezo を統合）
+    wakayama_kenmin,   # 和歌山地区の唯一の入口
+    hakodate_kaikan,   # 函館Ａ地区の唯一の入口（PDF・先読み1か月）
 )
 
 # build.py はこのリストを順に実行する。失敗しても他に影響しないよう個別try。
@@ -52,4 +54,6 @@ ALL_SCRAPERS = [
     pia_arena_mm,
     npb_baseball,
     jleague,
+    wakayama_kenmin,
+    hakodate_kaikan,
 ]

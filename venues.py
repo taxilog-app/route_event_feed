@@ -254,6 +254,21 @@ JL_HIMA = Venue(key="jl_himastadium_gifu", name="ヒマラヤスタジアム岐�
 JL_AXIS = Venue(key="jl_axis_tottori", name="Axisバードスタジアム(鳥取)", lat=35.458227, lng=134.221760, region="鳥取", big_box=True, official_url=_JL_URL)
 JL_HANAZONO = Venue(key="jl_hanazono", name="東大阪市花園ラグビー場", lat=34.669327, lng=135.626569, region="大阪", big_box=True, official_url=_JL_URL)
 
+# ─── ホール（Jリーグ・Bリーグが届かない営業圏の入口） ─────────────────────
+# 座標はOSM実測・営業圏は境界ポリゴンで確認（2026-08-09）。
+WAKAYAMA_KENMIN = Venue(
+    key="wakayama_kenmin", name="和歌山県民文化会館",
+    lat=34.224865, lng=135.167887, region="和歌山",
+    official_url="http://www.wacaf.or.jp/event/event_view.html?hall=1",
+)
+# ネーミングライツで「函館サーモン・まるなまホール」に改称済み。
+# 運転手が呼び慣れた旧称を主にし、現名称を括弧で添える。
+HAKODATE_KAIKAN = Venue(
+    key="hakodate_kaikan", name="函館市民会館(まるなまホール)",
+    lat=41.782914, lng=140.784128, region="北海道",
+    official_url="https://www.zaidan-hakodate.com/kaikan/",
+)
+
 # 全会場リスト（build.py から参照）
 ALL_VENUES = [
     MARINE_MESSE_A, MARINE_MESSE_B, FUKUOKA_CONGRESS, FUKUOKA_KOKUSAI_CENTER,
@@ -276,6 +291,7 @@ ALL_VENUES = [
     JL_KANSEKI, JL_GIKEN, JL_GOGO_KANAZAWA, JL_ALWIN, JL_NINJA, JL_MEGLIO,
     JL_NAGANO_U, JL_HATO, JL_ROHTO, JL_SHODA, JL_OKINAWA, JL_SHIRANAMI,
     JL_HIMA, JL_AXIS, JL_HANAZONO,
+    WAKAYAMA_KENMIN, HAKODATE_KAIKAN,
 ]
 
 # マリンメッセ系: CMS会場ID → Venue

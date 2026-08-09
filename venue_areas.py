@@ -125,4 +125,7 @@ VENUE_AREAS = {
     "jl_himastadium_gifu": "gifu",         # 岐阜市長良（ポリゴン✅）
     "jl_axis_tottori": "tottori",          # 鳥取市（鳥取=全県1地区）
     "jl_hanazono": "osaka",                # 東大阪市（大阪市域交通圏に含む・ポリゴン✅）
+    # ── ホール（球技場もアリーナも無い営業圏の入口・2026-08-09）──
+    "wakayama_kenmin": "wakayama",         # 和歌山市小松原通（ポリゴン✅）
+    "hakodate_kaikan": "hakodate_a",       # 函館市湯川町＝函館交通圏（A地区は函館市・北斗市・七飯町）
 }
