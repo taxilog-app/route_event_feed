@@ -269,6 +269,110 @@ HAKODATE_KAIKAN = Venue(
     official_url="https://www.zaidan-hakodate.com/kaikan/",
 )
 
+
+# ─── Bリーグ（PREMIER/ONE/NEXT）のアリーナ ───────────────────────────────
+# 2026-08-09 追加。Jリーグ・プロ野球では会場が作れない営業圏（京都市域・福井・三重・
+# 福岡県B地区・島根・岩手・徳島市部 ほか）を埋める要。
+# 座標は住所検索(Nominatim)と名前検索(Overpass)の2系統で取り、市区町村まで一致した
+# ものだけ採用している（総称名『体育館』に釣られて別の建物を掴む事故が実際に起きた）。
+_BL_URL = "https://www.bleague.jp/schedule/"
+BL_TOYOTA_ARENA_TOKYO = Venue(key="bl_toyota_arena_tokyo", name="TOYOTA ARENA TOKYO", lat=35.626591, lng=139.782654, region="東京", big_box=True, official_url=_BL_URL)
+BL_YOKOHAMA_BUNTAI = Venue(key="bl_yokohama_buntai", name="横浜BUNTAI", lat=35.440972, lng=139.636517, region="神奈川", big_box=True, official_url=_BL_URL)
+BL_SAGA_ARENA = Venue(key="bl_saga_arena", name="SAGAアリーナ", lat=33.274746, lng=130.292846, region="佐賀", big_box=True, official_url=_BL_URL)
+BL_HOKKAI_KITAERU = Venue(key="bl_hokkai_kitaeru", name="北海きたえーる", lat=43.043985, lng=141.376249, region="北海道", big_box=True, official_url=_BL_URL)
+BL_TODOROKI_ARENA = Venue(key="bl_todoroki_arena", name="東急ドレッセとどろきアリーナ", lat=35.586639, lng=139.646581, region="神奈川", big_box=True, official_url=_BL_URL)
+BL_LALA_ARENA = Venue(key="bl_lala_arena", name="LaLa arena TOKYO-BAY", lat=35.683809, lng=139.989729, region="千葉", big_box=True, official_url=_BL_URL)
+BL_MORIOKA_TAKAYA = Venue(key="bl_morioka_takaya", name="盛岡タカヤアリーナ", lat=39.690895, lng=141.120444, region="岩手", big_box=True, official_url=_BL_URL)
+BL_TACHIKAWA_TACHIHI = Venue(key="bl_tachikawa_tachihi", name="アリーナ立川立飛", lat=35.714418, lng=139.417141, region="東京", big_box=True, official_url=_BL_URL)
+BL_HAPPINESS_ARENA = Venue(key="bl_happiness_arena", name="ハピネスアリーナ(長崎)", lat=32.759331, lng=129.864632, region="長崎", big_box=True, official_url=_BL_URL)
+BL_OPENHOUSE_OTA = Venue(key="bl_openhouse_ota", name="オープンハウスアリーナ太田", lat=36.2765, lng=139.395909, region="群馬", big_box=True, official_url=_BL_URL)
+BL_NISSHIN_KYOTO = Venue(key="bl_nisshin_kyoto", name="にっしんでんきアリーナ京都(京都市体育館)", lat=34.995511, lng=135.71502, region="京", big_box=True, official_url=_BL_URL)
+BL_WHITE_RING = Venue(key="bl_white_ring", name="ホワイトリング(長野)", lat=36.6047, lng=138.20627, region="長野", big_box=True, official_url=_BL_URL)
+BL_GLION_KOBE = Venue(key="bl_glion_kobe", name="GLION ARENA KOBE", lat=34.681661, lng=135.196072, region="兵庫", big_box=True, official_url=_BL_URL)
+BL_MATSUE_TAIIKUKAN = Venue(key="bl_matsue_taiikukan", name="松江市総合体育館", lat=35.471291, lng=133.066009, region="島根", big_box=True, official_url=_BL_URL)
+BL_CHIBA_PORT_ARENA = Venue(key="bl_chiba_port_arena", name="千葉ポートアリーナ", lat=35.603845, lng=140.110992, region="千葉", big_box=True, official_url=_BL_URL)
+BL_YKKAP_ARENA = Venue(key="bl_ykkap_arena", name="YKK APアリーナ(富山)", lat=36.644418, lng=137.19052, region="富山", big_box=True, official_url=_BL_URL)
+BL_OKINAWA_SUNTORY = Venue(key="bl_okinawa_suntory", name="沖縄サントリーアリーナ", lat=26.33278, lng=127.783571, region="沖縄", big_box=True, official_url=_BL_URL)
+BL_KOSHIGAYA = Venue(key="bl_koshigaya", name="越谷市立総合体育館", lat=35.902755, lng=139.813467, region="埼玉", big_box=True, official_url=_BL_URL)
+BL_ADASTRIA_MITO = Venue(key="bl_adastria_mito", name="アダストリアみとアリーナ", lat=36.380431, lng=140.448767, region="茨城", big_box=True, official_url=_BL_URL)
+BL_XEBIO_SENDAI = Venue(key="bl_xebio_sendai", name="ゼビオアリーナ仙台", lat=38.230297, lng=140.887247, region="宮城", big_box=True, official_url=_BL_URL)
+BL_CNA_AKITA = Venue(key="bl_cna_akita", name="CNAアリーナ☆あきた", lat=39.725785, lng=140.087708, region="秋田", big_box=True, official_url=_BL_URL)
+BL_KUMAMOTO_KENSO = Venue(key="bl_kumamoto_kenso", name="熊本県立総合体育館", lat=32.814457, lng=130.701509, region="熊本", big_box=True, official_url=_BL_URL)
+BL_OTA_SOGO = Venue(key="bl_ota_sogo", name="EBARA WAVE アリーナおおた(大田区総合体育館)", lat=35.564601, lng=139.727862, region="東京", big_box=True, official_url=_BL_URL)
+BL_ROHTO_ARENA_NARA = Venue(key="bl_rohto_arena_nara", name="ロートアリーナ奈良", lat=34.695175, lng=135.828037, region="奈良", big_box=True, official_url=_BL_URL)
+BL_SHIGA_DAIHATSU = Venue(key="bl_shiga_daihatsu", name="滋賀ダイハツアリーナ", lat=34.970826, lng=135.951016, region="滋賀", big_box=True, official_url=_BL_URL)
+BL_OOKINI_MAISHIMA = Venue(key="bl_ookini_maishima", name="おおきにアリーナ舞洲", lat=34.665471, lng=135.397633, region="大阪", big_box=True, official_url=_BL_URL)
+BL_AORE_NAGAOKA = Venue(key="bl_aore_nagaoka", name="シティホールプラザ アオーレ長岡", lat=37.446216, lng=138.851374, region="新潟", big_box=True, official_url=_BL_URL)
+BL_ESFORTA_HACHIOJI = Venue(key="bl_esforta_hachioji", name="エスフォルタアリーナ八王子", lat=35.639903, lng=139.292541, region="東京", big_box=True, official_url=_BL_URL)
+BL_URAWA_KOMABA = Venue(key="bl_urawa_komaba", name="浦和駒場体育館", lat=35.872395, lng=139.662174, region="埼玉", big_box=True, official_url=_BL_URL)
+BL_ANABUKI_KAGAWA = Venue(key="bl_anabuki_kagawa", name="あなぶきアリーナ香川", lat=34.353791, lng=134.046089, region="香川", big_box=True, official_url=_BL_URL)
+BL_TERIHA_SEKISUI = Venue(key="bl_teriha_sekisui", name="照葉積水ハウスアリーナ", lat=33.667667, lng=130.417605, region="福岡", big_box=True, official_url=_BL_URL)
+BL_YOKOHAMA_BUDOKAN = Venue(key="bl_yokohama_budokan", name="横浜武道館", lat=35.439739, lng=139.63634, region="神奈川", big_box=True, official_url=_BL_URL)
+BL_BREX_UTSUNOMIYA = Venue(key="bl_brex_utsunomiya", name="ブレックスアリーナ宇都宮", lat=36.561143, lng=139.910806, region="栃木", big_box=True, official_url=_BL_URL)
+BL_MATSUYAMA_COMI = Venue(key="bl_matsuyama_comi", name="松山市総合コミュニティセンター", lat=33.83585, lng=132.755154, region="愛媛", big_box=True, official_url=_BL_URL)
+BL_HIROSHIMA_GREEN = Venue(key="bl_hiroshima_green", name="広島グリーンアリーナ", lat=34.399457, lng=132.455075, region="広島", big_box=True, official_url=_BL_URL)
+BL_WING_KARIYA = Venue(key="bl_wing_kariya", name="ウィングアリーナ刈谷", lat=35.019371, lng=137.010336, region="愛知", big_box=True, official_url=_BL_URL)
+BL_TOMONY_TOKUSHIMA = Venue(key="bl_tomony_tokushima", name="とくぎんトモニアリーナ(徳島市立体育館)", lat=34.076443, lng=134.549957, region="徳島", big_box=True, official_url=_BL_URL)
+BL_SHIGETO_OKAYAMA = Venue(key="bl_shigeto_okayama", name="シゲトーアリーナ岡山", lat=34.677455, lng=133.919924, region="岡山", big_box=True, official_url=_BL_URL)
+BL_OKB_GIFU = Venue(key="bl_okb_gifu", name="OKBぎふ清流アリーナ", lat=35.391322, lng=136.725615, region="岐阜", big_box=True, official_url=_BL_URL)
+BL_YAMAGATA_KENSO = Venue(key="bl_yamagata_kenso", name="山形県総合運動公園", lat=38.335961, lng=140.377547, region="山形", big_box=True, official_url=_BL_URL)
+BL_BIWAJIMA = Venue(key="bl_biwajima", name="名古屋市枇杷島スポーツセンター", lat=35.187863, lng=136.875091, region="愛知", big_box=True, official_url=_BL_URL)
+BL_ISHIKAWA_SPORTS = Venue(key="bl_ishikawa_sports", name="いしかわ総合スポーツセンター", lat=36.579561, lng=136.598213, region="石川", big_box=True, official_url=_BL_URL)
+BL_TAWARADA = Venue(key="bl_tawarada", name="俵田翁記念体育館(宇部)", lat=33.946834, lng=131.272205, region="山口", big_box=True, official_url=_BL_URL)
+BL_KAGOSHIMA_KENSO = Venue(key="bl_kagoshima_kenso", name="鹿児島県総合体育センター体育館", lat=31.566708, lng=130.555024, region="鹿児島", big_box=False, official_url=_BL_URL)
+BL_AGF_SUZUKA = Venue(key="bl_agf_suzuka", name="AGF鈴鹿体育館", lat=34.842809, lng=136.590933, region="三重", big_box=False, official_url=_BL_URL)
+BL_KAKUHIRO_AOMORI = Venue(key="bl_kakuhiro_aomori", name="カクヒログループスーパーアリーナ(青森市総合体育館)", lat=40.838998, lng=140.841383, region="青森", big_box=False, official_url=_BL_URL)
+BL_KARIYA_SHITAI = Venue(key="bl_kariya_shitai", name="刈谷市体育館", lat=34.990779, lng=136.984945, region="愛知", big_box=False, official_url=_BL_URL)
+BL_KANAZAWA_SHISO = Venue(key="bl_kanazawa_shiso", name="金沢市総合体育館", lat=36.539941, lng=136.650211, region="石川", big_box=False, official_url=_BL_URL)
+BL_SHIZUOKA_CHUO = Venue(key="bl_shizuoka_chuo", name="静岡市中央体育館", lat=34.981635, lng=138.385021, region="静岡", big_box=False, official_url=_BL_URL)
+BL_TSUYAMA = Venue(key="bl_tsuyama", name="津山総合体育館", lat=35.068961, lng=134.008342, region="岡山", big_box=False, official_url=_BL_URL)
+BL_AKIBADAI = Venue(key="bl_akibadai", name="秋葉台文化体育館(藤沢)", lat=35.390322, lng=139.445109, region="神奈川", big_box=False, official_url=_BL_URL)
+BL_DEAI_DOME = Venue(key="bl_deai_dome", name="岐阜メモリアルセンター で愛ドーム", lat=35.44119, lng=136.76412, region="岐阜", big_box=False, official_url=_BL_URL)
+BL_NIKKAN_TOCHIGI = Venue(key="bl_nikkan_tochigi", name="日環アリーナ栃木", lat=36.512303, lng=139.866243, region="栃木", big_box=False, official_url=_BL_URL)
+BL_BUTTERFLY_TOKOROZAWA = Venue(key="bl_butterfly_tokorozawa", name="バタフライアリーナ所沢(所沢市民体育館)", lat=35.810025, lng=139.463156, region="埼玉", big_box=False, official_url=_BL_URL)
+BL_JTEKT_NARA = Venue(key="bl_jtekt_nara", name="ジェイテクトアリーナ奈良", lat=34.49072, lng=135.791422, region="奈良", big_box=False, official_url=_BL_URL)
+BL_HAMAMATSU_ARENA = Venue(key="bl_hamamatsu_arena", name="浜松アリーナ", lat=34.71777, lng=137.766861, region="静岡", big_box=False, official_url=_BL_URL)
+BL_SUNARENA_SENDAI = Venue(key="bl_sunarena_sendai", name="サンアリーナせんだい(薩摩川内)", lat=31.851534, lng=130.302662, region="鹿児島", big_box=False, official_url=_BL_URL)
+BL_YOYOGI_2 = Venue(key="bl_yoyogi_2", name="国立代々木競技場 第二体育館", lat=35.666258, lng=139.700084, region="東京", big_box=False, official_url=_BL_URL)
+BL_SAMUKAWA = Venue(key="bl_samukawa", name="シンコースポーツ寒川アリーナ", lat=35.375142, lng=139.385575, region="神奈川", big_box=False, official_url=_BL_URL)
+BL_FPCO_FUKUYAMA = Venue(key="bl_fpco_fukuyama", name="エフピコアリーナふくやま", lat=34.466808, lng=133.367616, region="広島", big_box=False, official_url=_BL_URL)
+BL_TOGOSHI = Venue(key="bl_togoshi", name="品川区立戸越体育館", lat=35.610819, lng=139.720609, region="東京", big_box=False, official_url=_BL_URL)
+BL_ASUE_OSAKA = Venue(key="bl_asue_osaka", name="Asueアリーナ大阪(大阪市中央体育館)", lat=34.65963, lng=135.44485, region="大阪", big_box=False, official_url=_BL_URL)
+BL_HITACHI_IKENOKAWA = Venue(key="bl_hitachi_ikenokawa", name="日立市池の川さくらアリーナ", lat=36.576541, lng=140.647487, region="茨城", big_box=False, official_url=_BL_URL)
+BL_SHIMADZU_KYOTO = Venue(key="bl_shimadzu_kyoto", name="島津アリーナ京都", lat=35.023411, lng=135.728412, region="京", big_box=False, official_url=_BL_URL)
+BL_EHIME_BUDOKAN = Venue(key="bl_ehime_budokan", name="愛媛県武道館", lat=33.810824, lng=132.745601, region="愛媛", big_box=False, official_url=_BL_URL)
+BL_MACHIDA_SHITAI = Venue(key="bl_machida_shitai", name="町田市立総合体育館", lat=35.536228, lng=139.479338, region="東京", big_box=False, official_url=_BL_URL)
+BL_FLAT_HACHINOHE = Venue(key="bl_flat_hachinohe", name="FLAT HACHINOHE(八戸)", lat=40.511448, lng=141.427858, region="青森", big_box=False, official_url=_BL_URL)
+BL_TSURUSHIN_KOMAGI = Venue(key="bl_tsurushin_komagi", name="つるしんアリーナ小真木原(鶴岡)", lat=38.713739, lng=139.81337, region="山形", big_box=False, official_url=_BL_URL)
+BL_EDOGAWA = Venue(key="bl_edogawa", name="江戸川区スポーツセンター", lat=35.667908, lng=139.862524, region="東京", big_box=False, official_url=_BL_URL)
+BL_TAKAYAMA_BIG = Venue(key="bl_takayama_big", name="飛騨高山ビッグアリーナ", lat=36.150291, lng=137.232704, region="岐阜", big_box=False, official_url=_BL_URL)
+BL_MUTSU_MAEDA = Venue(key="bl_mutsu_maeda", name="むつマエダアリーナ", lat=41.28144, lng=141.172925, region="青森", big_box=False, official_url=_BL_URL)
+BL_ICHINOSEKI_UDOME = Venue(key="bl_ichinoseki_udome", name="一関ヒロセユードーム", lat=38.940751, lng=141.155497, region="岩手", big_box=False, official_url=_BL_URL)
+BL_TOMONY_NAKA = Venue(key="bl_tomony_naka", name="とくぎんトモニアリーナ那賀", lat=33.856602, lng=134.496569, region="徳島", big_box=False, official_url=_BL_URL)
+BL_AIRA = Venue(key="bl_aira", name="ビーラインスポーツパーク姶良体育館", lat=31.742458, lng=130.665765, region="鹿児島", big_box=False, official_url=_BL_URL)
+BL_NAKAMURA_SPORTS = Venue(key="bl_nakamura_sports", name="名古屋市中村スポーツセンター", lat=35.173269, lng=136.857827, region="愛知", big_box=False, official_url=_BL_URL)
+BL_MAEDA_ARENA = Venue(key="bl_maeda_arena", name="マエダアリーナ(新青森県総合運動公園)", lat=40.841406, lng=140.843532, region="青森", big_box=False, official_url=_BL_URL)
+BL_MARUGAME_SHIMIN = Venue(key="bl_marugame_shimin", name="丸亀市民体育館", lat=34.263044, lng=133.78878, region="香川", big_box=False, official_url=_BL_URL)
+BL_NIIGATA_HIGASHI = Venue(key="bl_niigata_higashi", name="新潟市東総合スポーツセンター", lat=37.915179, lng=139.105058, region="新潟", big_box=False, official_url=_BL_URL)
+BL_ENTRIO_TOYODA = Venue(key="bl_entrio_toyoda", name="豊田合成記念体育館エントリオ", lat=35.254536, lng=136.821667, region="愛知", big_box=False, official_url=_BL_URL)
+BL_YAMAGATA_SPORTS = Venue(key="bl_yamagata_sports", name="山形市総合スポーツセンター", lat=38.28042, lng=140.347582, region="山形", big_box=False, official_url=_BL_URL)
+BL_AOMORI_BUDOKAN = Venue(key="bl_aomori_budokan", name="青森県武道館", lat=40.810668, lng=140.79925, region="青森", big_box=False, official_url=_BL_URL)
+BL_TSURUGA_SOGO = Venue(key="bl_tsuruga_sogo", name="敦賀市総合運動公園体育館", lat=35.642471, lng=136.032711, region="福井", big_box=False, official_url=_BL_URL)
+BL_ZENTSUJI = Venue(key="bl_zentsuji", name="善通寺市民体育館", lat=34.239109, lng=133.792369, region="香川", big_box=False, official_url=_BL_URL)
+BL_AISIN_ECHIZEN = Venue(key="bl_aisin_echizen", name="越前市アイシンスポーツアリーナ", lat=35.910226, lng=136.176757, region="福井", big_box=False, official_url=_BL_URL)
+BL_KURUME_ARENA = Venue(key="bl_kurume_arena", name="久留米アリーナ", lat=33.32116, lng=130.530522, region="福岡", big_box=False, official_url=_BL_URL)
+BL_KIKUYO = Venue(key="bl_kikuyo", name="菊陽町総合体育館", lat=32.868324, lng=130.803368, region="熊本", big_box=False, official_url=_BL_URL)
+BL_HISAI = Venue(key="bl_hisai", name="津市久居体育館", lat=34.680138, lng=136.48433, region="三重", big_box=False, official_url=_BL_URL)
+BL_SOKO_YOKKAICHI = Venue(key="bl_soko_yokkaichi", name="相好アリーナ四日市", lat=34.952246, lng=136.614855, region="三重", big_box=False, official_url=_BL_URL)
+BL_ARAKAWA = Venue(key="bl_arakawa", name="荒川総合スポーツセンター", lat=35.735848, lng=139.791278, region="東京", big_box=False, official_url=_BL_URL)
+BL_OGINO = Venue(key="bl_ogino", name="荻野運動公園体育館(厚木)", lat=35.482068, lng=139.320859, region="神奈川", big_box=False, official_url=_BL_URL)
+BL_JCOM_SHIMONOSEKI = Venue(key="bl_jcom_shimonoseki", name="J:comアリーナ下関", lat=33.987888, lng=130.933555, region="山口", big_box=False, official_url=_BL_URL)
+BL_CHICHIBUNOMIYA = Venue(key="bl_chichibunomiya", name="秩父宮記念体育館(藤沢)", lat=35.332375, lng=139.489009, region="神奈川", big_box=False, official_url=_BL_URL)
+BL_HIROSHIMA_SUNPLAZA = Venue(key="bl_hiroshima_sunplaza", name="広島サンプラザホール", lat=34.37068, lng=132.394542, region="広島", big_box=False, official_url=_BL_URL)
+BL_FUNABASHI_ARENA = Venue(key="bl_funabashi_arena", name="船橋アリーナ", lat=35.729655, lng=140.052551, region="千葉", big_box=False, official_url=_BL_URL)
+BL_KITAKYUSHU_SOGO = Venue(key="bl_kitakyushu_sogo", name="北九州市立総合体育館", lat=33.87317, lng=130.841751, region="福岡", big_box=False, official_url=_BL_URL)
+BL_TAKAMATSU_SOGO = Venue(key="bl_takamatsu_sogo", name="高松市総合体育館", lat=34.342031, lng=134.074029, region="香川", big_box=False, official_url=_BL_URL)
+
 # 全会場リスト（build.py から参照）
 ALL_VENUES = [
     MARINE_MESSE_A, MARINE_MESSE_B, FUKUOKA_CONGRESS, FUKUOKA_KOKUSAI_CENTER,
@@ -292,6 +396,38 @@ ALL_VENUES = [
     JL_NAGANO_U, JL_HATO, JL_ROHTO, JL_SHODA, JL_OKINAWA, JL_SHIRANAMI,
     JL_HIMA, JL_AXIS, JL_HANAZONO,
     WAKAYAMA_KENMIN, HAKODATE_KAIKAN,
+    BL_TOYOTA_ARENA_TOKYO, BL_YOKOHAMA_BUNTAI, BL_SAGA_ARENA,
+    BL_HOKKAI_KITAERU, BL_TODOROKI_ARENA, BL_LALA_ARENA,
+    BL_MORIOKA_TAKAYA, BL_TACHIKAWA_TACHIHI, BL_HAPPINESS_ARENA,
+    BL_OPENHOUSE_OTA, BL_NISSHIN_KYOTO, BL_WHITE_RING,
+    BL_GLION_KOBE, BL_MATSUE_TAIIKUKAN, BL_CHIBA_PORT_ARENA,
+    BL_YKKAP_ARENA, BL_OKINAWA_SUNTORY, BL_KOSHIGAYA,
+    BL_ADASTRIA_MITO, BL_XEBIO_SENDAI, BL_CNA_AKITA,
+    BL_KUMAMOTO_KENSO, BL_OTA_SOGO, BL_ROHTO_ARENA_NARA,
+    BL_SHIGA_DAIHATSU, BL_OOKINI_MAISHIMA, BL_AORE_NAGAOKA,
+    BL_ESFORTA_HACHIOJI, BL_URAWA_KOMABA, BL_ANABUKI_KAGAWA,
+    BL_TERIHA_SEKISUI, BL_YOKOHAMA_BUDOKAN, BL_BREX_UTSUNOMIYA,
+    BL_MATSUYAMA_COMI, BL_HIROSHIMA_GREEN, BL_WING_KARIYA,
+    BL_TOMONY_TOKUSHIMA, BL_SHIGETO_OKAYAMA, BL_OKB_GIFU,
+    BL_YAMAGATA_KENSO, BL_BIWAJIMA, BL_ISHIKAWA_SPORTS,
+    BL_TAWARADA, BL_KAGOSHIMA_KENSO, BL_AGF_SUZUKA,
+    BL_KAKUHIRO_AOMORI, BL_KARIYA_SHITAI, BL_KANAZAWA_SHISO,
+    BL_SHIZUOKA_CHUO, BL_TSUYAMA, BL_AKIBADAI,
+    BL_DEAI_DOME, BL_NIKKAN_TOCHIGI, BL_BUTTERFLY_TOKOROZAWA,
+    BL_JTEKT_NARA, BL_HAMAMATSU_ARENA, BL_SUNARENA_SENDAI,
+    BL_YOYOGI_2, BL_SAMUKAWA, BL_FPCO_FUKUYAMA,
+    BL_TOGOSHI, BL_ASUE_OSAKA, BL_HITACHI_IKENOKAWA,
+    BL_SHIMADZU_KYOTO, BL_EHIME_BUDOKAN, BL_MACHIDA_SHITAI,
+    BL_FLAT_HACHINOHE, BL_TSURUSHIN_KOMAGI, BL_EDOGAWA,
+    BL_TAKAYAMA_BIG, BL_MUTSU_MAEDA, BL_ICHINOSEKI_UDOME,
+    BL_TOMONY_NAKA, BL_AIRA, BL_NAKAMURA_SPORTS,
+    BL_MAEDA_ARENA, BL_MARUGAME_SHIMIN, BL_NIIGATA_HIGASHI,
+    BL_ENTRIO_TOYODA, BL_YAMAGATA_SPORTS, BL_AOMORI_BUDOKAN,
+    BL_TSURUGA_SOGO, BL_ZENTSUJI, BL_AISIN_ECHIZEN,
+    BL_KURUME_ARENA, BL_KIKUYO, BL_HISAI,
+    BL_SOKO_YOKKAICHI, BL_ARAKAWA, BL_OGINO,
+    BL_JCOM_SHIMONOSEKI, BL_CHICHIBUNOMIYA, BL_HIROSHIMA_SUNPLAZA,
+    BL_FUNABASHI_ARENA, BL_KITAKYUSHU_SOGO, BL_TAKAMATSU_SOGO,
 ]
 
 # マリンメッセ系: CMS会場ID → Venue

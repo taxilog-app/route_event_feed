@@ -24,6 +24,7 @@ from . import (
     pia_arena_mm,
     npb_baseball,
     jleague,   # J1/J2/J3統一（旧 avispa/cerezo を統合）
+    bleague,           # B1/B2/B3統一（京都市域・福井・三重・福岡県B地区ほかの要）
     wakayama_kenmin,   # 和歌山地区の唯一の入口
     hakodate_kaikan,   # 函館Ａ地区の唯一の入口（PDF・先読み1か月）
 )
@@ -54,6 +55,7 @@ ALL_SCRAPERS = [
     pia_arena_mm,
     npb_baseball,
     jleague,
+    bleague,
     wakayama_kenmin,
     hakodate_kaikan,
 ]
