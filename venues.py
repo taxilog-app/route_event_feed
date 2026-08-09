@@ -214,9 +214,45 @@ JL_FUKUARI = Venue(key="jl_fukuari", name="フクダ電子アリーナ", lat=35.
 JL_MIKUNI = Venue(key="jl_mikuni_kitakyushu", name="ミクニワールドスタジアム北九州", lat=33.896300, lng=130.924700, region="福岡", big_box=True, official_url=_JL_URL)
 JL_EKIMAE = Venue(key="jl_ekimae_tosu", name="駅前不動産スタジアム", lat=33.373600, lng=130.521900, region="佐賀", big_box=True, official_url=_JL_URL)
 JL_EGAO = Venue(key="jl_egao_kumamoto", name="えがお健康スタジアム", lat=32.784700, lng=130.794700, region="熊本", big_box=True, official_url=_JL_URL)
-JL_OKAYAMA = Venue(key="jl_okayama", name="シティライトスタジアム(岡山)", lat=34.663600, lng=133.946300, region="岡山", big_box=True, official_url=_JL_URL)
+JL_OKAYAMA = Venue(key="jl_okayama", name="JFE晴れの国スタジアム(岡山)", lat=34.663600, lng=133.946300, region="岡山", big_box=True, official_url=_JL_URL)
 JL_ATSUBETSU = Venue(key="jl_atsubetsu", name="厚別公園競技場", lat=43.035600, lng=141.447200, region="北海道", big_box=True, official_url=_JL_URL)
 JL_MERCARI = Venue(key="jl_mercari_kashima", name="メルカリスタジアム", lat=35.992200, lng=140.640800, region="茨城", big_box=True, official_url=_JL_URL)
+
+# ── J-League 拡充第2弾（2026-08-09・会場0の営業圏を埋める）──
+# 座標はOSM実測・営業圏は境界ポリゴン点検＋運賃ブロックCSV（taxi_fare_blocks.csv）で確認。
+JL_SANKYO_KASHIWA = Venue(key="jl_sankyo_kashiwa", name="三協フロンテア柏スタジアム", lat=35.848479, lng=139.975052, region="千葉", big_box=True, official_url=_JL_URL)
+JL_PEACE_NAGASAKI = Venue(key="jl_peace_nagasaki", name="ピーススタジアム(長崎)", lat=32.759052, lng=129.864960, region="長崎", big_box=True, official_url=_JL_URL)
+JL_MITOSHIN = Venue(key="jl_mitoshin_kasamatsu", name="水戸信用金庫スタジアム(笠松)", lat=36.457294, lng=140.538191, region="茨城", big_box=True, official_url=_JL_URL)
+JL_ICHIGO = Venue(key="jl_ichigo_shintomi", name="いちご宮崎新富サッカー場", lat=32.073711, lng=131.491396, region="宮崎", big_box=True, official_url=_JL_URL)
+JL_SATOYAMA = Venue(key="jl_satoyama_imabari", name="アシックス里山スタジアム(今治)", lat=34.040663, lng=132.958807, region="愛媛", big_box=True, official_url=_JL_URL)
+JL_KURASUS = Venue(key="jl_kurasus_oita", name="クラサスドーム大分", lat=33.200768, lng=131.657485, region="大分", big_box=True, official_url=_JL_URL)
+JL_SOYU = Venue(key="jl_soyu_akita", name="ソユースタジアム(秋田)", lat=39.721521, lng=140.095762, region="秋田", big_box=True, official_url=_JL_URL)
+JL_HAWAIIANS = Venue(key="jl_hawaiians_iwaki", name="ハワイアンズスタジアムいわき", lat=37.017238, lng=140.864412, region="福島", big_box=True, official_url=_JL_URL)
+JL_PRIFOODS = Venue(key="jl_prifoods_hachinohe", name="プライフーズスタジアム(八戸)", lat=40.590392, lng=141.457085, region="青森", big_box=True, official_url=_JL_URL)
+JL_TOYAMA = Venue(key="jl_toyama", name="富山県総合運動公園陸上競技場", lat=36.625020, lng=137.195574, region="富山", big_box=True, official_url=_JL_URL)
+JL_FUJIEDA = Venue(key="jl_fujieda", name="藤枝総合運動公園サッカー場", lat=34.881507, lng=138.232894, region="静岡", big_box=True, official_url=_JL_URL)
+JL_POCARI = Venue(key="jl_pocari_naruto", name="ポカリスエットスタジアム(鳴門)", lat=34.168307, lng=134.617860, region="徳島", big_box=True, official_url=_JL_URL)
+JL_CFS = Venue(key="jl_cfs_tochigi_city", name="CITY FOOTBALL STATION(栃木市)", lat=36.337568, lng=139.645288, region="栃木", big_box=True, official_url=_JL_URL)
+JL_JIT = Venue(key="jl_jit_kofu", name="JITリサイクルインクスタジアム(甲府)", lat=35.622343, lng=138.589833, region="山梨", big_box=True, official_url=_JL_URL)
+JL_NACK = Venue(key="jl_nack_omiya", name="NACK5スタジアム大宮", lat=35.916197, lng=139.633475, region="埼玉", big_box=True, official_url=_JL_URL)
+JL_ND_YAMAGATA = Venue(key="jl_nd_yamagata", name="NDソフトスタジアム山形", lat=38.335599, lng=140.378390, region="山形", big_box=True, official_url=_JL_URL)
+JL_TOHO = Venue(key="jl_toho_fukushima", name="とうほう・みんなのスタジアム(福島)", lat=37.723265, lng=140.361302, region="福島", big_box=True, official_url=_JL_URL)
+JL_MIRAI = Venue(key="jl_mirai_yamaguchi", name="維新みらいふスタジアム(山口)", lat=34.154402, lng=131.437475, region="山口", big_box=True, official_url=_JL_URL)
+JL_KANSEKI = Venue(key="jl_kanseki_utsunomiya", name="カンセキスタジアムとちぎ(宇都宮)", lat=36.515020, lng=139.857453, region="栃木", big_box=True, official_url=_JL_URL)
+JL_GIKEN = Venue(key="jl_giken_kochi", name="GIKENスタジアム(高知・春野)", lat=33.511272, lng=133.502781, region="高知", big_box=True, official_url=_JL_URL)
+JL_GOGO_KANAZAWA = Venue(key="jl_gogo_kanazawa", name="金沢ゴーゴーカレースタジアム", lat=36.595926, lng=136.657685, region="石川", big_box=True, official_url=_JL_URL)
+JL_ALWIN = Venue(key="jl_alwin_matsumoto", name="サンプロアルウィン(松本)", lat=36.179716, lng=137.917138, region="長野", big_box=True, official_url=_JL_URL)
+JL_NINJA = Venue(key="jl_ninja_matsuyama", name="ニンジニアスタジアム(松山)", lat=33.768231, lng=132.797610, region="愛媛", big_box=True, official_url=_JL_URL)
+JL_MEGLIO = Venue(key="jl_meglio_marugame", name="四国化成MEGLIOスタジアム(丸亀)", lat=34.261783, lng=133.785766, region="香川", big_box=True, official_url=_JL_URL)
+JL_NAGANO_U = Venue(key="jl_nagano_u", name="長野Uスタジアム", lat=36.580017, lng=138.169421, region="長野", big_box=True, official_url=_JL_URL)
+JL_HATO = Venue(key="jl_hato_hikone", name="平和堂HATOスタジアム(彦根)", lat=35.281691, lng=136.255226, region="滋賀", big_box=True, official_url=_JL_URL)
+JL_ROHTO = Venue(key="jl_rohto_nara", name="ロートフィールド奈良", lat=34.697587, lng=135.829169, region="奈良", big_box=True, official_url=_JL_URL)
+JL_SHODA = Venue(key="jl_shoda_gunma", name="正田醤油スタジアム群馬(前橋)", lat=36.411607, lng=139.053189, region="群馬", big_box=True, official_url=_JL_URL)
+JL_OKINAWA = Venue(key="jl_okinawa_athletic", name="沖縄県総合運動公園陸上競技場", lat=26.308613, lng=127.821115, region="沖縄", big_box=True, official_url=_JL_URL)
+JL_SHIRANAMI = Venue(key="jl_shiranami_kagoshima", name="白波スタジアム(鹿児島)", lat=31.564895, lng=130.560167, region="鹿児島", big_box=True, official_url=_JL_URL)
+JL_HIMA = Venue(key="jl_himastadium_gifu", name="ヒマラヤスタジアム岐阜(長良川)", lat=35.441335, lng=136.766064, region="岐阜", big_box=True, official_url=_JL_URL)
+JL_AXIS = Venue(key="jl_axis_tottori", name="Axisバードスタジアム(鳥取)", lat=35.458227, lng=134.221760, region="鳥取", big_box=True, official_url=_JL_URL)
+JL_HANAZONO = Venue(key="jl_hanazono", name="東大阪市花園ラグビー場", lat=34.669327, lng=135.626569, region="大阪", big_box=True, official_url=_JL_URL)
 
 # 全会場リスト（build.py から参照）
 ALL_VENUES = [
@@ -234,6 +270,12 @@ ALL_VENUES = [
     JL_GIONS, JL_YAMAHA, JL_IAI, JL_TOYOTA, JL_MIZUHO, JL_PANASTA, JL_YODOKO,
     JL_NOEVIR, JL_SANGA, JL_EDION, JL_YURTEC, JL_DENKA, JL_FUKUARI, JL_MIKUNI,
     JL_EKIMAE, JL_EGAO, JL_OKAYAMA, JL_ATSUBETSU, JL_MERCARI,
+    JL_SANKYO_KASHIWA, JL_PEACE_NAGASAKI, JL_MITOSHIN, JL_ICHIGO, JL_SATOYAMA,
+    JL_KURASUS, JL_SOYU, JL_HAWAIIANS, JL_PRIFOODS, JL_TOYAMA, JL_FUJIEDA,
+    JL_POCARI, JL_CFS, JL_JIT, JL_NACK, JL_ND_YAMAGATA, JL_TOHO, JL_MIRAI,
+    JL_KANSEKI, JL_GIKEN, JL_GOGO_KANAZAWA, JL_ALWIN, JL_NINJA, JL_MEGLIO,
+    JL_NAGANO_U, JL_HATO, JL_ROHTO, JL_SHODA, JL_OKINAWA, JL_SHIRANAMI,
+    JL_HIMA, JL_AXIS, JL_HANAZONO,
 ]
 
 # マリンメッセ系: CMS会場ID → Venue

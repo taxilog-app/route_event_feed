@@ -90,4 +90,39 @@ VENUE_AREAS = {
     "jl_denka_swan": "niigata_a",          # 新潟市中央区（A地区=新潟市側）
     "jl_okayama": "okayama",               # 岡山市北区
     "jl_mercari_kashima": "ibaraki",       # 鹿嶋市
+    # ── 拡充第2弾（2026-08-09）。境界の形がある圏はポリゴン点検✅・
+    #    形なし圏は運賃ブロックCSV(taxi_fare_blocks.csv)の市町村定義で判定 ──
+    "jl_sankyo_kashiwa": "chiba",          # 柏市（ポリゴン✅）
+    "jl_peace_nagasaki": "nagasaki",       # 長崎市（ポリゴン✅）
+    "jl_mitoshin_kasamatsu": "ibaraki",    # 那珂市・笠松運動公園（水戸市ではない・ポリゴン✅）
+    "jl_ichigo_shintomi": "miyazaki",      # 児湯郡新富町（ポリゴン✅）
+    "jl_satoyama_imabari": "ehime",        # 今治市（愛媛=全県1地区）
+    "jl_kurasus_oita": "oita",             # 大分市（ポリゴン✅）
+    "jl_soyu_akita": "akita",              # 秋田市（秋田=全県1地区）
+    "jl_hawaiians_iwaki": "fukushima",     # いわき市（福島=全県1地区）
+    "jl_prifoods_hachinohe": "aomori",     # 八戸市（青森=全県1地区）
+    "jl_toyama": "toyama",                 # 富山市（富山=全県1地区）
+    "jl_fujieda": "shizuoka",              # 藤枝市（ポリゴン✅）
+    "jl_pocari_naruto": "tokushima_city",  # 鳴門市（徳島県市部地区）
+    "jl_cfs_tochigi_city": "tochigi",      # 栃木市（ポリゴン✅）
+    "jl_jit_kofu": "yamanashi_a",          # 甲府市＝甲府交通圏（ポリゴン✅・Bに入らないことも✅）
+    "jl_nack_omiya": "saitama_s",          # さいたま市大宮区（ポリゴン✅）
+    "jl_nd_yamagata": "yamagata",          # 天童市（山形=全県1地区）
+    "jl_toho_fukushima": "fukushima",      # 福島市（福島=全県1地区）
+    "jl_mirai_yamaguchi": "yamaguchi",     # 山口市（山口=全県1地区）
+    "jl_kanseki_utsunomiya": "tochigi",    # 宇都宮市（ポリゴン✅）
+    "jl_giken_kochi": "kochi_city",        # 高知市春野町（高知市域地区=高知市＋旧伊野町）
+    "jl_gogo_kanazawa": "ishikawa",        # 金沢市（石川=全県1地区）
+    "jl_alwin_matsumoto": "nagano_b",      # 松本市（長野A=旧長野市・千曲市・埴科郡のみ→Aではない）
+    "jl_ninja_matsuyama": "ehime",         # 松山市（愛媛=全県1地区）
+    "jl_meglio_marugame": "kagawa",        # 丸亀市（香川地区=小豆郡・直島以外の全域）
+    "jl_nagano_u": "nagano_a",             # 長野市篠ノ井（1966年合併=H17以前の旧長野市域→A地区）
+    "jl_hato_hikone": "shiga",             # 彦根市（ポリゴン✅）
+    "jl_rohto_nara": "nara",               # 奈良市鴻ノ池（ポリゴン✅）
+    "jl_shoda_gunma": "gunma_a",           # 前橋市＝中・西毛交通圏（ポリゴン✅・Bに入らないことも✅）
+    "jl_okinawa_athletic": "okinawa_main", # 沖縄市（ポリゴン✅）
+    "jl_shiranami_kagoshima": "kagoshima", # 鹿児島市鴨池（ポリゴン✅）
+    "jl_himastadium_gifu": "gifu",         # 岐阜市長良（ポリゴン✅）
+    "jl_axis_tottori": "tottori",          # 鳥取市（鳥取=全県1地区）
+    "jl_hanazono": "osaka",                # 東大阪市（大阪市域交通圏に含む・ポリゴン✅）
 }
