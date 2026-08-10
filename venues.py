@@ -269,6 +269,35 @@ HAKODATE_KAIKAN = Venue(
     official_url="https://www.zaidan-hakodate.com/kaikan/",
 )
 
+# ─── 本土なのに会場が0だった営業圏の入口（2026-08-10 追加） ────────────────
+# 「会場ゼロ＝離島・郡部だから興行が無い」で片付けていた23圏を運賃ブロックの定義で
+# 数え直したところ、9圏は離島でも郡部でもない本土だった＝探していなかっただけ。
+# そのうち大箱があり、かつ公式が予定を出している4圏をここで埋める。
+# 座標は2系統（Nominatim / Overpass）で取り、市区町村まで一致・両者1〜30m以内を確認。
+# 営業圏は境界ポリゴンで検算（宮城だけは形が無いので運賃ブロックの定義で判定＝
+# 「仙台地区を除く宮城県の全域」／利府町は仙台市ではない＋仙台の形の外）。
+SEKISUI_HEIM_SUPER_ARENA = Venue(
+    key="sekisui_heim_super_arena", name="セキスイハイムスーパーアリーナ(グランディ・21)",
+    lat=38.337561, lng=140.953119, region="宮城", big_box=True,
+    official_url="https://www.mspf.jp/grande21/index.php?action=event_show_list",
+)
+SAKURAMATE = Venue(
+    key="sakuramate", name="熊谷文化創造館さくらめいと",
+    lat=36.165951, lng=139.327950, region="埼玉",
+    official_url="https://www.sakuramate.jp/events/",
+)
+ODAWARA_SANNOMARU_HALL = Venue(
+    key="odawara_sannomaru_hall", name="小田原三の丸ホール",
+    lat=35.249337, lng=139.158315, region="神奈川",
+    official_url="https://ooo-hall.jp/event/",
+)
+# 屋外の大型フェス会場（SWEET LOVE SHOWER・Mt.FUJIMAKI 等）。動員が桁違いなので大箱扱い。
+KIRARA_YAMANAKAKO = Venue(
+    key="kirara_yamanakako", name="山中湖交流プラザきらら",
+    lat=35.419814, lng=138.901012, region="山梨", big_box=True,
+    official_url="http://www.kirarayamanakako.jp/event.php",
+)
+
 
 # ─── Bリーグ（PREMIER/ONE/NEXT）のアリーナ ───────────────────────────────
 # 2026-08-09 追加。Jリーグ・プロ野球では会場が作れない営業圏（京都市域・福井・三重・
@@ -396,6 +425,7 @@ ALL_VENUES = [
     JL_NAGANO_U, JL_HATO, JL_ROHTO, JL_SHODA, JL_OKINAWA, JL_SHIRANAMI,
     JL_HIMA, JL_AXIS, JL_HANAZONO,
     WAKAYAMA_KENMIN, HAKODATE_KAIKAN,
+    SEKISUI_HEIM_SUPER_ARENA, SAKURAMATE, ODAWARA_SANNOMARU_HALL, KIRARA_YAMANAKAKO,
     BL_TOYOTA_ARENA_TOKYO, BL_YOKOHAMA_BUNTAI, BL_SAGA_ARENA,
     BL_HOKKAI_KITAERU, BL_TODOROKI_ARENA, BL_LALA_ARENA,
     BL_MORIOKA_TAKAYA, BL_TACHIKAWA_TACHIHI, BL_HAPPINESS_ARENA,
