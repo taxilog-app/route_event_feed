@@ -42,11 +42,11 @@ BEST_DENKI_STADIUM = Venue(
     official_url="https://www.avispa.co.jp/",
 )
 # ボートレース福岡（中央区那の津）。社長指示 2026-10-06。
-# 🔴 lat/lng は社長に場所（タクシーの着け場所）を聞いてから入れる。未設定の間は
-#    ALL_VENUES に入らず、scrapers/boatrace_fukuoka.py も配らない（当てずっぽうの座標を配らない）。
+# 🔴 座標は社長が地図で指定した「タクシーを着ける所」（2026-10-06）。
+#    正規のタクシー乗り場ではないが、実際に客を拾う場所（那の津1丁目4・駐車場の出口付近）。
 BOATRACE_FUKUOKA = Venue(
     key="boatrace_fukuoka", name="ボートレース福岡",
-    lat=None, lng=None, region="福岡",
+    lat=33.598285, lng=130.396873, region="福岡",
     official_url="https://www.boatrace-fukuoka.com/",
 )
 HAKATAZA = Venue(
