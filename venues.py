@@ -41,6 +41,14 @@ BEST_DENKI_STADIUM = Venue(
     lat=33.593722, lng=130.467500, region="福岡", big_box=True,
     official_url="https://www.avispa.co.jp/",
 )
+# ボートレース福岡（中央区那の津）。社長指示 2026-10-06。
+# 🔴 lat/lng は社長に場所（タクシーの着け場所）を聞いてから入れる。未設定の間は
+#    ALL_VENUES に入らず、scrapers/boatrace_fukuoka.py も配らない（当てずっぽうの座標を配らない）。
+BOATRACE_FUKUOKA = Venue(
+    key="boatrace_fukuoka", name="ボートレース福岡",
+    lat=None, lng=None, region="福岡",
+    official_url="https://www.boatrace-fukuoka.com/",
+)
 HAKATAZA = Venue(
     key="hakataza", name="博多座",
     lat=33.595734, lng=130.406395, region="福岡",
@@ -467,3 +475,7 @@ MARINE_MESSE_VENUE_ID_MAP = {
     "M1a4HXq8jUU5bnAKafsY": FUKUOKA_CONGRESS,
     "ZxskZD69QFYho9rXNUZl": FUKUOKA_KOKUSAI_CENTER,
 }
+
+# 場所が決まった会場だけ配る（ボートレース福岡は場所の確認待ち）
+if BOATRACE_FUKUOKA.lat is not None:
+    ALL_VENUES.append(BOATRACE_FUKUOKA)

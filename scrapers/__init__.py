@@ -32,6 +32,7 @@ from . import (
     sakuramate,        # 埼玉県北部地区（熊谷市）
     odawara_hall,      # 小田原地区
     kirara,            # 山梨県B地区（屋外の大型フェス）
+    boatrace_fukuoka,  # ボートレース福岡（問い合わせ中・事実のみ・ENABLEDで止められる）
 )
 
 # build.py はこのリストを順に実行する。失敗しても他に影響しないよう個別try。
@@ -67,4 +68,5 @@ ALL_SCRAPERS = [
     sakuramate,
     odawara_hall,
     kirara,
+    boatrace_fukuoka,
 ]

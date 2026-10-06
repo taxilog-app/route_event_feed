@@ -26,6 +26,7 @@ VENUE_AREAS = {
     "fukuoka_civic_hall": "fukuoka",
     "momochi_bunka": "fukuoka",
     "fukuoka_budokan": "fukuoka",
+    "boatrace_fukuoka": "fukuoka",      # 中央区那の津
     # ── 九州（福岡交通圏の外） ──
     "jl_mikuni_kitakyushu": "kitakyushu",  # 北九州市小倉北区（福岡県だが別交通圏）
     "jl_ekimae_tosu": "saga",              # 鳥栖市
