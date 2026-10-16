@@ -54,6 +54,14 @@ def test_carry_stops_after_14_days():
     assert "引き継ぎ14日を過ぎ" in h["problems"][0]
 
 
+def test_known_failure_is_listed_but_not_alarm():
+    feed = _prev()
+    h = watch_and_carry(feed, _prev(), None, V,
+                        {"fukuoka_budokan": {"ok": False, "error": "403"}}, TODAY)
+    assert h["problems"] == []
+    assert h["knownFailures"] and h["knownFailures"][0].startswith("fukuoka_budokan")
+
+
 if __name__ == "__main__":
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     for t in tests:

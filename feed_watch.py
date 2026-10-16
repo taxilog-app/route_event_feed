@@ -26,6 +26,13 @@ LIVE_BASE = "https://taxilog-app.github.io/route_event_feed"
 DROP_MIN_PREV = 3        # 前回これ以上あった会場が0件になったら「消えた」
 CARRY_MAX_DAYS = 14      # 引き継ぎの上限日数
 
+# 事情が分かっていて手を打ってある取り込み口の失敗。health.json には書くが CI を赤にしない
+# （毎回赤だと通知が鳴りっぱなしになり、本物の故障を見逃す）。直ったら行ごと消すこと。
+KNOWN_FAILURES = {
+    "fukuoka_budokan": "武道館のサイトがGitHubからの問い合わせを403で断る。"
+                       "アプリが端末から直接取っている（2026-10-16〜・正式な了解を依頼中）",
+}
+
 
 def _load_json_url(url: str, timeout: int = 20):
     try:
@@ -107,9 +114,13 @@ def watch_and_carry(feed: dict, prev_feed: dict | None, prev_health: dict | None
                                            e.get("startMinute") or 0))
 
     problems: list[str] = []
+    known: list[str] = []
     for name, st in sorted(scraper_status.items()):
         if not st.get("ok"):
-            problems.append(f"取り込み口が失敗: {name}: {st.get('error')}")
+            if name in KNOWN_FAILURES:
+                known.append(f"{name}: {KNOWN_FAILURES[name]}")
+            else:
+                problems.append(f"取り込み口が失敗: {name}: {st.get('error')}")
     for key in dropped:
         if key in lost:
             problems.append(f"会場が消えた（引き継ぎ{CARRY_MAX_DAYS}日を過ぎ・配信から外れた）: {key}")
@@ -130,4 +141,5 @@ def watch_and_carry(feed: dict, prev_feed: dict | None, prev_health: dict | None
         "dropped": dropped,
         "carried": carried,
         "problems": problems,
+        "knownFailures": known,
     }
