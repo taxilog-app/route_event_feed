@@ -43,6 +43,9 @@ def _parse(body: str, today: _dt.date) -> list[Event]:
         title = flatten_ws(str(raw.get("title", "")))
         if not title:
             continue
+        # 「休館日」も同じ暦に載っている＝催しではないので外す（2026-10-16）
+        if "休館" in title:
+            continue
         start_str = str(raw.get("start", ""))
         start_dt = _parse_iso(start_str)
         if start_dt is None:
