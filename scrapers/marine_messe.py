@@ -21,11 +21,11 @@ _QUERY_JSON = (
     '"schema_key":"rMR9xdMj","orders":"order","offset":0,"limit":200}'
 )
 
-_RANGE_RE = re.compile(
-    r"(\d{1,2})\.(\d{1,2})(?:\([月火水木金土日]\))?\s*[～〜~]\s*"
-    r"(\d{1,2})\.(\d{1,2})(?:\([月火水木金土日]\))?"
-)
-_SINGLE_RE = re.compile(r"(\d{1,2})\.(\d{1,2})(?:\([月火水木金土日]\))?")
+# 年が付く書き方「2028.1.29(土)」もある（先の年の公演）。年を付けずに読むと
+# 「28.1」＝28月として落ち、4会場まとめて0件になっていた（2026-10-16）。
+_YMD = r"(?<![\d.])(?:(\d{4})\.)?(\d{1,2})\.(\d{1,2})(?:\([月火水木金土日]\))?"
+_RANGE_RE = re.compile(_YMD + r"\s*[～〜~]\s*" + _YMD)
+_SINGLE_RE = re.compile(_YMD)
 _TIME_RE = re.compile(r"(\d{1,2}):(\d{2})")
 _BR_RE = re.compile(r"<br\s*/?>", re.IGNORECASE)
 
@@ -63,12 +63,25 @@ def _parse_records(raw) -> list[Event]:
         if venue is None:
             continue  # 未登録会場はスキップ
         genre = guess_genre(title)
-        for occ_date, hh, mm in _expand_schedule(date_string, today):
+        try:
+            schedule = _expand_schedule(date_string, today)
+        except ValueError as e:
+            # 1件の書き方が読めなくても、他の公演まで捨てない
+            print(f"[warn] marine_messe: 日程を読めず飛ばす {title!r} {date_string!r}: {e}")
+            continue
+        for occ_date, hh, mm in schedule:
             events.append(Event(
                 venue=venue, date=occ_date, title=title, genre=genre,
                 start_hour=hh, start_minute=mm,
             ))
     return events
+
+
+def _to_date(year, month, day, today):
+    """年が書いてあればその年、無ければ resolve_year で近い年を当てる。"""
+    if year:
+        return _dt.date(int(year), int(month), int(day))
+    return resolve_year(int(month), int(day), today)
 
 
 def _dig_reference_name(field):
@@ -110,9 +123,8 @@ def _expand_schedule(date_string: str, today: _dt.date):
             continue
         r = _RANGE_RE.search(line)
         if r:
-            m1, d1, m2, d2 = (int(r.group(i)) for i in range(1, 5))
-            start = resolve_year(m1, d1, today)
-            end = resolve_year(m2, d2, today)
+            start = _to_date(r.group(1), r.group(2), r.group(3), today)
+            end = _to_date(r.group(4), r.group(5), r.group(6), today)
             dt = start
             while dt <= end:
                 range_dates.append(dt)
@@ -123,8 +135,7 @@ def _expand_schedule(date_string: str, today: _dt.date):
             continue
         s = _SINGLE_RE.search(line)
         if s:
-            m, d = int(s.group(1)), int(s.group(2))
-            dt = resolve_year(m, d, today)
+            dt = _to_date(s.group(1), s.group(2), s.group(3), today)
             tm = _TIME_RE.search(line)
             t = (int(tm.group(1)), int(tm.group(2))) if tm else None
             if dt >= today:
