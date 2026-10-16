@@ -20,13 +20,19 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      health: ${{ steps.build.outputs.health }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - run: python build.py
+      # 読み取りの部品の検査（落ちたら配信しない＝前回の正常な配信が残る）
+      - run: python test_marine_messe.py
+      - run: python test_feed_watch.py
+      - id: build
+        run: python build.py
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
@@ -40,3 +46,10 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+      # 配った後で、取り込み口の失敗・消えた会場があれば赤にする（GitHub が持ち主へメール）。
+      # 2026-10-16 マリンメッセ4会場が黙って0件になっていた件の再発防止。
+      - name: 要対応を赤にする
+        if: needs.build.outputs.health == 'failure'
+        run: |
+          echo "::error::イベントの配信に要対応があります。build ジョブの『build.py』の [要対応] と、公開中の health.json を見てください（配信は済んでいます）"
+          exit 1

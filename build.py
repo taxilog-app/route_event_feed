@@ -12,6 +12,7 @@ import os
 import sys
 
 from model import build_feed, GENRES
+from feed_watch import load_previous, watch_and_carry
 from venues import ALL_VENUES
 from venue_areas import VENUE_AREAS
 import scrapers
@@ -142,14 +143,17 @@ def report_missing_sport_times(feed: dict) -> list[str]:
 def collect():
     events = []
     errors = []
+    status = {}  # 取り込み口ごとの結果（health.json へ）
     for mod in scrapers.ALL_SCRAPERS:
         name = mod.__name__.split(".")[-1]
         try:
             got = mod.fetch()
             events.extend(got)
+            status[name] = {"ok": True, "count": len(got)}
             print(f"[ok] {name}: {len(got)} events")
         except Exception as e:  # noqa: BLE001 - 1会場の失敗で全体を止めない
             errors.append(f"{name}: {e}")
+            status[name] = {"ok": False, "count": 0, "error": f"{type(e).__name__}: {e}"[:300]}
             print(f"[fail] {name}: {e}", file=sys.stderr)
     # 重複除去（会場+日付+タイトル）
     seen = set()
@@ -160,15 +164,22 @@ def collect():
             continue
         seen.add(k)
         uniq.append(e)
-    return uniq, errors
+    return uniq, errors, status
 
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     force = "--force" in sys.argv  # 意図的な大変更時のみゲートを迂回
-    prev_total = _previous_total()
-    events, errors = collect()
+    # 比べる相手＝今公開している配信（CI の out/ は git に残った古い物のことがある）
+    prev_feed = load_previous(OUT_DIR, "events_jp.json")
+    prev_health = load_previous(OUT_DIR, "health.json")
+    prev_total = len(prev_feed.get("events", [])) if prev_feed else _previous_total()
+    events, errors, status = collect()
     feed = build_feed(events, ALL_VENUES)
+    # 会場ごとの見張り＋消えた会場は前回の予定を引き継ぐ（feed_watch.py）
+    health = watch_and_carry(feed, prev_feed, prev_health,
+                             {v.key: v.to_json() for v in ALL_VENUES},
+                             status, _dt.date.today())
     area_problems = apply_area_keys(feed)
 
     # ★サニティゲート: 違反したら JSON を書かずに exit(1)。
@@ -193,6 +204,19 @@ def main():
         json.dump(feed, f, ensure_ascii=False, separators=(",", ":"))
     print(f"wrote {json_path} ({len(feed['events'])} events, "
           f"{len(feed['venues'])} venues)")
+
+    health_path = os.path.join(OUT_DIR, "health.json")
+    with open(health_path, "w", encoding="utf-8") as f:
+        json.dump(health, f, ensure_ascii=False, indent=1)
+    if health["problems"]:
+        print(f"[要対応] {len(health['problems'])} 件（配信は済ませる・CIは赤にする）:",
+              file=sys.stderr)
+        for p in health["problems"]:
+            print(f"  - {p}", file=sys.stderr)
+    gh_out = os.environ.get("GITHUB_OUTPUT")
+    if gh_out:
+        with open(gh_out, "a", encoding="utf-8") as f:
+            f.write(f"health={'failure' if health['problems'] else 'ok'}\n")
 
     html_path = os.path.join(OUT_DIR, "index.html")
     with open(html_path, "w", encoding="utf-8") as f:
