@@ -26,6 +26,17 @@ LIVE_BASE = "https://taxilog-app.github.io/route_event_feed"
 DROP_MIN_PREV = 3        # 前回これ以上あった会場が0件になったら「消えた」
 CARRY_MAX_DAYS = 14      # 引き継ぎの上限日数
 
+# ── 最重要の会場（2026-10-16 社長「ドームの情報は命・絶対に外さない」）──
+# アプリはドームの催しの開始時刻から「規制が始まる」を読み上げる。予定が消えても、
+# 開始時刻が抜けても、知らせは黙って出なくなる。なのでここだけは厳しく見る：
+#   ① これから45日の予定が0件 → 赤（ドームは毎月なにかある）
+#   ② これから14日の予定に開始時刻が無い → 赤（manual_events.json で補うまで鳴り続ける）
+CRITICAL_VENUES = {
+    "paypay_dome": "みずほPayPayドーム（規制の知らせの元）",
+}
+CRITICAL_HORIZON_DAYS = 45
+CRITICAL_START_TIME_DAYS = 14
+
 # 事情が分かっていて手を打ってある取り込み口の失敗。health.json には書くが CI を赤にしない
 # （毎回赤だと通知が鳴りっぱなしになり、本物の故障を見逃す）。直ったら行ごと消すこと。
 KNOWN_FAILURES = {
@@ -69,6 +80,63 @@ def future_counts(feed: dict | None, today: _dt.date) -> dict[str, int]:
         if (e.get("date") or "") >= t:
             k = e.get("venueKey")
             out[k] = out.get(k, 0) + 1
+    return out
+
+
+def apply_manual(feed: dict, manual: list, all_venues_json: dict[str, dict],
+                 today: _dt.date) -> list[str]:
+    """人の手で補う予定（manual_events.json）を当てる。適用した内容の説明を返す。
+
+    1件の書き方：{"venueKey","date","startHour","startMinute"} ＋任意で
+    "title"（その日の同じ会場で、題名にこれを含む予定だけに当てる）・"genre"・"note"。
+    - その日・その会場に予定があれば、開始時刻だけ書き換える（取れていない時の補い）
+    - 無ければ1件足す（"title" と "genre" が要る）
+    過ぎた日の行は使わない（消し忘れても害が無い）。
+    """
+    applied: list[str] = []
+    t = today.isoformat()
+    venue_keys = {v["key"] for v in feed.get("venues", [])}
+    for m in manual or []:
+        d = m.get("date") or ""
+        k = m.get("venueKey")
+        if d < t or not k:
+            continue
+        hits = [e for e in feed["events"]
+                if e.get("venueKey") == k and e.get("date") == d
+                and (not m.get("title") or m["title"] in (e.get("title") or ""))]
+        if hits:
+            for e in hits:
+                e["startHour"], e["startMinute"] = m["startHour"], m["startMinute"]
+            applied.append(f"{d} {k} 開始時刻を補った {m['startHour']}:{m['startMinute']:02d}")
+        elif m.get("title") and m.get("genre"):
+            feed["events"].append({
+                "venueKey": k, "date": d, "title": m["title"], "genre": m["genre"],
+                "startHour": m["startHour"], "startMinute": m["startMinute"],
+            })
+            if k not in venue_keys and k in all_venues_json:
+                feed["venues"].append(dict(all_venues_json[k]))
+                venue_keys.add(k)
+            applied.append(f"{d} {k} 予定を足した {m['title']}")
+    feed["events"].sort(key=lambda e: (e.get("date") or "", e.get("startHour") or 0,
+                                       e.get("startMinute") or 0))
+    return applied
+
+
+def critical_problems(feed: dict, today: _dt.date) -> list[str]:
+    """最重要の会場（ドーム）の見張り。"""
+    out: list[str] = []
+    t = today.isoformat()
+    horizon = (today + _dt.timedelta(days=CRITICAL_HORIZON_DAYS)).isoformat()
+    near = (today + _dt.timedelta(days=CRITICAL_START_TIME_DAYS)).isoformat()
+    for key, name in CRITICAL_VENUES.items():
+        evs = [e for e in feed.get("events", [])
+               if e.get("venueKey") == key and t <= (e.get("date") or "") <= horizon]
+        if not evs:
+            out.append(f"🔴最重要 {name}: これから{CRITICAL_HORIZON_DAYS}日の予定が0件")
+        for e in evs:
+            if e.get("date") <= near and e.get("startHour") is None:
+                out.append(f"🔴最重要 {name}: {e['date']}「{e.get('title')}」に開始時刻が無い"
+                           "（規制の知らせが出ない）→ 公式で確かめて manual_events.json に足す")
     return out
 
 
@@ -129,6 +197,7 @@ def watch_and_carry(feed: dict, prev_feed: dict | None, prev_health: dict | None
         else:
             problems.append(f"会場が消えた（引き継げる予定なし）: {key}")
 
+    problems.extend(critical_problems(feed, today))
     counts = future_counts(feed, today)
     return {
         "generatedAt": _dt.datetime.now(_dt.timezone.utc).isoformat(),

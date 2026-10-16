@@ -1,0 +1,21 @@
+name: dome-canary
+
+# ドームの見張り役：公開中の配信を3時間ごとに外から確かめる（dome_canary.py）。
+# 失敗＝赤＝GitHub が持ち主へメール。build.yml が止まっても、こちらが気づく。
+on:
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python dome_canary.py

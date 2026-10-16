@@ -29,6 +29,7 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       # 読み取りの部品の検査（落ちたら配信しない＝前回の正常な配信が残る）
+      - run: python test_paypay_dome.py
       - run: python test_marine_messe.py
       - run: python test_feed_watch.py
       - run: python test_fukuoka_budokan.py

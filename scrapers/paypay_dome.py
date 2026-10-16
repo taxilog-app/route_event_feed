@@ -21,6 +21,27 @@ from .base import http_get, soup_of, extract_ordered_lines
 # ── イベントスケジュール ──────────────────────────────────────────────────
 _DATE_RE = re.compile(r"^(20\d{2})/(\d{1,2})/(\d{1,2})")
 _KAIEN_RE = re.compile(r"開演\s*(\d{1,2}):(\d{2})")
+# 開始時刻の書き方は催しごとにばらばら（2026-10-16 実物で確認）：
+#   「開演 18:00」「18:30 開演」「イベント開始予定:15:00」「試合開始 14:00」
+# どれも読む。「16:30 開場」「入場開始:13:00」は開始ではないので読まない。
+_START_PATTERNS = (
+    re.compile(r"(?:開演|開始予定|試合開始|(?<!場)開始)\s*[:：]?\s*(\d{1,2})[:：](\d{2})"),
+    re.compile(r"(\d{1,2})[:：](\d{2})\s*(?:開演|(?<!場)開始)"),
+)
+
+
+def _start_time(line: str):
+    """1行から開始時刻 (時, 分) を取り出す。開場・入場の時刻は取らない。"""
+    # 「入場開始」「開場」だけの行は開始時刻ではない
+    if re.search(r"開場|入場", line) and not re.search(r"開演|開始予定|試合開始|(?<!場)開始", line):
+        return None
+    for pat in _START_PATTERNS:
+        m = pat.search(line)
+        if m:
+            hh, mm = int(m.group(1)), int(m.group(2))
+            if 0 <= hh <= 23 and 0 <= mm <= 59:
+                return hh, mm
+    return None
 _HEAD_RE = re.compile(r"^(イベント|コンサート|試合|公演|ライブ)$")
 _TEL_RE = re.compile(r"TEL[:：]|問い合わせ|お問合せ")
 
@@ -96,9 +117,10 @@ def _parse_events(html: str) -> list[Event]:
             continue
         if cur_date is None:
             continue
-        tm = _KAIEN_RE.search(line)
-        if tm:
-            cur_hh, cur_mm = int(tm.group(1)), int(tm.group(2))
+        st = _start_time(line)
+        if st:
+            if cur_hh is None:  # 2回公演は先頭の回を採る
+                cur_hh, cur_mm = st
             continue
         if len(line) <= 6 and _HEAD_RE.match(line):
             continue

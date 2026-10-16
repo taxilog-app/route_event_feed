@@ -12,7 +12,7 @@ import os
 import sys
 
 from model import build_feed, GENRES
-from feed_watch import load_previous, watch_and_carry
+from feed_watch import apply_manual, load_previous, watch_and_carry
 from venues import ALL_VENUES
 from venue_areas import VENUE_AREAS
 import scrapers
@@ -176,9 +176,15 @@ def main():
     prev_total = len(prev_feed.get("events", [])) if prev_feed else _previous_total()
     events, errors, status = collect()
     feed = build_feed(events, ALL_VENUES)
+    # 人の手で補う予定（取り込み口が開始時刻を取れない時など・manual_events.json）
+    venues_json = {v.key: v.to_json() for v in ALL_VENUES}
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "manual_events.json"), encoding="utf-8") as f:
+        for line in apply_manual(feed, json.load(f), venues_json, _dt.date.today()):
+            print(f"[手で補った] {line}")
     # 会場ごとの見張り＋消えた会場は前回の予定を引き継ぐ（feed_watch.py）
     health = watch_and_carry(feed, prev_feed, prev_health,
-                             {v.key: v.to_json() for v in ALL_VENUES},
+                             venues_json,
                              status, _dt.date.today())
     area_problems = apply_area_keys(feed)
 
