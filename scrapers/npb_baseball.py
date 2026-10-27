@@ -60,6 +60,20 @@ def fetch() -> list[Event]:
     today = _dt.date.today()
     events: list[Event] = []
     seen: set[tuple] = set()
+    # 🔴 日本シリーズは月別カレンダーに載らない（別ページ /nippons/YYYY/）。
+    #    2026-10-27 の第3戦（みずほPayPayドーム）が配信から漏れ、アプリのイベント・
+    #    AIの日報に出なかった（社長指摘 2026-10-28）。日本シリーズのページも読む。
+    try:
+        resp = http_get(f"https://npb.jp/nippons/{today.year}/",
+                        accept="text/html,*/*")
+        html = resp.content.decode("utf-8", "replace")
+        for ev in _parse_nippon_series(html, today.year, today):
+            key = (ev.venue.key, ev.date, ev.title)
+            if key not in seen:
+                seen.add(key)
+                events.append(ev)
+    except Exception:
+        pass  # シリーズ前・ページ無し（404）は黙って月別だけ
     for month_offset in range(4):
         y, m = _add_months(today.year, today.month, month_offset)
         url = f"https://npb.jp/games/{y}/schedule_{m:02d}.html"
@@ -113,6 +127,75 @@ def _parse(html: str, year: int, month: int, today: _dt.date) -> list[Event]:
             hh, mm = int(tm.group(1)), int(tm.group(2))
         events.append(Event(
             venue=venue, date=d, title=f"{home} vs {away}",
+            genre=GENRE_SPORTS, start_hour=hh, start_minute=mm,
+        ))
+    return events
+
+
+# 日本シリーズのページの球団表記（地域名つき）→短縮名
+_SERIES_SHORT = {
+    "福岡ソフトバンク": "ソフトバンク", "横浜DeNA": "DeNA", "読売": "巨人", "巨人": "巨人",
+    "東京ヤクルト": "ヤクルト", "阪神": "阪神", "中日": "中日", "広島東洋": "広島",
+    "広島": "広島", "北海道日本ハム": "日本ハム", "オリックス": "オリックス",
+    "東北楽天": "楽天", "千葉ロッテ": "ロッテ", "埼玉西武": "西武",
+}
+# 結果のリンク（/scores/YYYY/MMDD/h-db-03/）の先頭＝ホーム球団の記号→本拠地
+#（終わった試合は球場名が消えるため。対象はこの取り込み口が持つ球場だけ）
+_HOME_BY_CODE = {
+    "h": PAYPAY_DOME, "db": YOKOHAMA_STADIUM, "s": MEIJI_JINGU, "t": KOSHIEN,
+    "m": ZOZO_MARINE, "f": ESCON_FIELD, "e": RAKUTEN_PARK, "c": MAZDA_STADIUM,
+}
+
+
+def _parse_nippon_series(html: str, year: int, today: _dt.date) -> list[Event]:
+    """日本シリーズ（npb.jp/nippons/YYYY/ の「試合日程・結果」）→ 予定。
+
+    1試合＝`table.sp_table`：`th`=第N戦／`td.r1`=「10月28日（水）」／
+    `td.r2 .t1`=ホーム（先に書かれる方）・`.score`=開始時刻（終わると点数）・`.t2`=ビジター／
+    `td.r3`=球場名（終わった試合には無い→結果リンクのホーム記号から本拠地）。
+    """
+    doc = soup_of(html)
+    events: list[Event] = []
+    for tbl in doc.select("#series_result table.sp_table"):
+        th = tbl.select_one("th")
+        r1 = tbl.select_one("td.r1")
+        if th is None or r1 is None:
+            continue
+        dm = re.search(r"(\d{1,2})月\s*(\d{1,2})日", r1.get_text())
+        if not dm:
+            continue
+        try:
+            d = _dt.date(year, int(dm.group(1)), int(dm.group(2)))
+        except ValueError:
+            continue
+        if d < today:
+            continue
+        r3 = tbl.select_one("td.r3")
+        venue = None
+        if r3 is not None:
+            venue = _VENUE_BY_LABEL.get(re.sub(r"\s", "", r3.get_text()))
+        if venue is None:
+            a = tbl.find_parent("a")
+            m = re.search(r"/scores/\d{4}/\d{4}/([a-z]+)-", (a.get("href") if a else "") or "")
+            if m:
+                venue = _HOME_BY_CODE.get(m.group(1))
+        if venue is None:
+            continue  # この取り込み口が持たない球場（東京D・京セラD 等）
+        def team(sel: str) -> str:
+            el = tbl.select_one(sel)
+            raw = re.sub(r"[○●△\s]", "", el.get_text() if el else "")
+            return _SERIES_SHORT.get(raw, raw)
+        home, away = team("td.r2 .t1"), team("td.r2 .t2")
+        if not home or not away:
+            continue
+        hh = mm = None
+        sc = tbl.select_one("td.r2 .score")
+        tm = _TIME_RE.fullmatch(re.sub(r"\s", "", sc.get_text())) if sc else None
+        if tm:
+            hh, mm = int(tm.group(1)), int(tm.group(2))
+        game_no = re.sub(r"\s", "", th.get_text())
+        events.append(Event(
+            venue=venue, date=d, title=f"日本シリーズ {game_no} {home} vs {away}",
             genre=GENRE_SPORTS, start_hour=hh, start_minute=mm,
         ))
     return events

@@ -33,6 +33,7 @@ jobs:
       - run: python test_marine_messe.py
       - run: python test_feed_watch.py
       - run: python test_fukuoka_budokan.py
+      - run: python test_npb_nippons.py
       - id: build
         run: python build.py
       - uses: actions/upload-pages-artifact@v3
