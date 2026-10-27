@@ -60,27 +60,35 @@ def fetch() -> list[Event]:
     today = _dt.date.today()
     events: list[Event] = []
     seen: set[tuple] = set()
+    # 🔴 読めたページの数。1つも読めなければ失敗として上げる（2026-10-28：GitHubの機械から
+    #    npb.jp が読めず「正常・0件」に見えて、日本シリーズの漏れに気づけなかった）。
+    ok_pages = 0
+    errors: list[str] = []
     # 🔴 日本シリーズは月別カレンダーに載らない（別ページ /nippons/YYYY/）。
     #    2026-10-27 の第3戦（みずほPayPayドーム）が配信から漏れ、アプリのイベント・
     #    AIの日報に出なかった（社長指摘 2026-10-28）。日本シリーズのページも読む。
     try:
         resp = http_get(f"https://npb.jp/nippons/{today.year}/",
                         accept="text/html,*/*")
+        ok_pages += 1
         html = resp.content.decode("utf-8", "replace")
         for ev in _parse_nippon_series(html, today.year, today):
             key = (ev.venue.key, ev.date, ev.title)
             if key not in seen:
                 seen.add(key)
                 events.append(ev)
-    except Exception:
-        pass  # シリーズ前・ページ無し（404）は黙って月別だけ
+    except Exception as ex:
+        # シリーズ前・ページ無し（404）は普通にある。月別も全部読めない時だけ失敗にする
+        errors.append(f"nippons: {type(ex).__name__}: {ex}")
     for month_offset in range(4):
         y, m = _add_months(today.year, today.month, month_offset)
         url = f"https://npb.jp/games/{y}/schedule_{m:02d}.html"
         try:
             resp = http_get(url, accept="text/html,*/*")
-        except Exception:
+        except Exception as ex:
+            errors.append(f"{url}: {type(ex).__name__}: {ex}")
             continue
+        ok_pages += 1
         html = resp.content.decode("utf-8", "replace")
         for ev in _parse(html, y, m, today):
             key = (ev.venue.key, ev.date, ev.title)
@@ -88,6 +96,8 @@ def fetch() -> list[Event]:
                 continue
             seen.add(key)
             events.append(ev)
+    if ok_pages == 0 and errors:
+        raise RuntimeError("npb.jp を1ページも読めなかった: " + " / ".join(errors[:2]))
     return events
 
 

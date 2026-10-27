@@ -118,5 +118,23 @@
   "startHour": 15,
   "startMinute": 0,
   "note": "九州場所（令和8年十一月場所・日本相撲協会の年間日程表で確認）。会場の予定に時刻が無いため、幕内の頃15:00を開始にしてアプリの終わりの予測（開始＋3時間）を打ち出し18:00頃に合わせる。2026-10-28 社長指示"
+ },
+ {
+  "venueKey": "paypay_dome",
+  "date": "2026-10-28",
+  "title": "日本シリーズ 第4戦 ソフトバンク vs DeNA",
+  "genre": "sports",
+  "startHour": 18,
+  "startMinute": 0,
+  "note": "SMBC日本シリーズ2026（npb.jp/nippons/2026/ で確認）。GitHubの機械から npb.jp が読めず配信に入らないため人の手で補う。2026-10-28"
+ },
+ {
+  "venueKey": "paypay_dome",
+  "date": "2026-10-29",
+  "title": "日本シリーズ 第5戦 ソフトバンク vs DeNA",
+  "genre": "sports",
+  "startHour": 18,
+  "startMinute": 0,
+  "note": "SMBC日本シリーズ2026（npb.jp/nippons/2026/ で確認）。GitHubの機械から npb.jp が読めず配信に入らないため人の手で補う。2026-10-28"
  }
 ]
